@@ -1,0 +1,19 @@
+Shells is Linux
+----------------
+
+Types of Shells
+
+1.Bourne shell (sh)
+2.korn shell   (ksh)    ------ This tree shell combined to linux BASH | Bourne again shell
+3.c shell      (csh)
+
+Note : In unix sh & bash are two different shell
+       In linux sh & bash are same
+       Linux does not have file extentions but our understanding we always use extention so hence for shell script use .sh (or) .bash
+
+SHE BANG
+---------
+#! --- this is called she-BANG
+       It determines the path of interpreter  ex : #!/bin/bash (or) #!/bin/python
+
+Ensure the code inside the script is run by given interpreter
