@@ -1,0 +1,35 @@
+# echo $PS1
+\u = username
+\h = hostname
+\W = current working directory
+
+ # PS1='[\u@\h \W]\$'   
+ # PS1='\e[33;1m\u\e[0m@\e[31;1m\h\e[0m\e[36m\w\e[0m'
+
+ for permenent change edit the /etc/bashrc file
+ find this line in bashrc file
+
+[ "$PS1" = "\\s-\\v\\\$ " ] && PS1="[\u@\h \W]\\$ "
+
+edit like
+
+[ "$PS1" = "\\s-\\v\\\$ " ] && PS1="[\e[33;1m\u\e[0m@\e[31;1m\h\e[0m]\e[36;1m\W\e[0m\\$ "
+
+# It's NOT a good idea to change this file unless you know what you
+# are doing. It's much better to create a custom.sh shell script in
+# /etc/profile.d/ to make custom changes to your environment, as this
+# will prevent the need for merging in future updates.
+
+Useful special prompt variables
+--------------------------------
+\d - Date
+\h - Hostname
+\H - Hostname with FQDN
+\t - time for 24hrs
+\T - time for 12hrs
+\@ - time for 12hrs AM/PM format
+
+Example
+---------
+PS1="[\D{%d/%m/%Y %H:%M:%S} \u@\h \W]$ "
+[19/02/2020 19:14:03 linuxlab@linuxlab etc]$ 
