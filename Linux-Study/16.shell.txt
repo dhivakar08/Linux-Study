@@ -17,3 +17,7 @@ SHE BANG
        It determines the path of interpreter  ex : #!/bin/bash (or) #!/bin/python
 
 Ensure the code inside the script is run by given interpreter
+
+What is script
+--------------
+A sequence of command pasted in a single file called script

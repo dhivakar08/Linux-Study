@@ -9,6 +9,7 @@
 # 3. Special Charactly : Only _ (underscore)
 
 ## No spcecial characters are allowed 
+## Ex: # docs_numner = 8 | here docs number is consider as a comand = is a 1st argument 8 is a 2nd argument
 ## Variable should not start with a number. 1var is invalid variable.
 
 ## Declare a variable there is no space, if you are provide the space it think like a command.

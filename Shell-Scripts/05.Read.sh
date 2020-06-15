@@ -8,3 +8,9 @@ echo  "Name = $name"
 
 # Here -p is used to prompt the message
 
+# read -sp <message> the enter value will not display on screen
+
+# Read the content from the file
+
+read hostname < /etc/hosts
+echo $hostname
