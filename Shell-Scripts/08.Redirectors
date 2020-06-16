@@ -1,0 +1,60 @@
+Redirectors
+-----------
+The redirectors are store the output in a file 
+Meaning if need the output for the feature reference we use redirectors
+redirectors use disk space
+
+Pipe
+-----
+When you don't need the output for the feature refernce use Pipe
+Pipe use memory, so it fast compare redirectors
+
+Redirectors Examples
+--------------------
+1. command < file    -------- input
+2. command > file    -------- output
+
+# yum install mariadb
+ create one file and enter show databases; save
+
+# mysql -t <filename>
+
+# ls > test 
+
+# cat test
+
+Note : In some situation we need display the output on the screen and same time send to output file also
+
+# ls | tee test1             ------ Here command tee is display the ls output on the screen and same time it send to output file 
+
+Types of output
+---------------
+1. std output                    ----- it specifies > (or) 1>
+2. std error                     ----- it specifies 2>
+3. Both stdoutput and stderror   ----- it specifies &> Here & means both 1 + 2
+4. Double Redirectors            ----- it append the log instead of overwrite 
+5. >                             ----- Remove old content and add new one   
+6. >>                            ----- Add new content to old one 
+
+Examples
+--------
+# ls -ld /opt /opt1  >out 2>err
+
+# ls -l /opt1 &>>out               ----- it append the out and error to out file
+
+# cat out
+
+/dev/null
+----------
+The null is the special file what ever output goes this file it will not store any where it nullified
+&>/dev/null
+
+Examples
+---------
+# yum install mariadb -y &>/dev/null 
+
+After the nullify the output using exit status to verify the installation
+
+
+
+
