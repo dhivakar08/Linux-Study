@@ -33,3 +33,9 @@ Example
 ---------
 PS1="[\D{%d/%m/%Y %H:%M:%S} \u@\h \W]$ "
 [19/02/2020 19:14:03 linuxlab@linuxlab etc]$ 
+
+
+root@localhost 03:49:17 ~]$cat /etc/profile.d/PS1.sh
+#!/bin/bash
+
+export PS1="\e[0\e[31;1m\u@\e[0\e[33;1m\h \e[0\e[36;1m\T \W]\$\e[0m"

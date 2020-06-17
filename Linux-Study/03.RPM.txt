@@ -1,8 +1,10 @@
-1. How to find which package certain command belongs to which package   
+1. How to find certain command belongs to which package      
 
 Very important question asked for CGI
 
-rpm -qf $(which date)        ---- Here after which mentioned which command want to findout
+# rpm -qf $(which date)        ---- Here after which mentioned which command want to findout
+
+# rpm -qf $(which pwd)         ----- qf -- query format
 
 for debian os
 
