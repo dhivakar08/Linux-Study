@@ -1,0 +1,36 @@
+Configure Kickstart server in Linux
+---------------------------------
+
+1. # yum install httpd* -y 
+
+2. # yum install system-config-Kickstart
+
+3. Mount the iso file to /mnt location  # mount /dev/cdrom /mnt
+
+4. mkdir -p /var/www/html/dvd
+
+5. cp -Rv /mnt/* /var/www/html/dvd
+
+6. # system-config-Kickstart 
+
+7. In the kickstart gui configure the settings based on your requirement
+
+8. click file and save the kickstart configuration file on root location 
+
+9. cp ks.cfg /var/www/html/dvd
+
+10. disable selinux
+
+11. firewall-cmd --permanent --add-service=httpd
+
+12. firewall-cmd --permanent --add-service=https 
+
+13. firewall-cmd --reload 
+
+14. open the browser and  http://<server ip>/dvd/ks.cfg    ------ it visibled the ok 
+
+15. Open the new vm/server insert the iso file and make a configurtaion like memory,hdd allocation
+
+16. Once start it display the linux booting screen press "Esc" on your keyboard
+
+17. type linux ks=http://<server ip>/dvd/ks.cfg
