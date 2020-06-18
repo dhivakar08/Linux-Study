@@ -1,0 +1,4 @@
+1.Umount target is busy
+
+fuser -kim /address  # kill any processes accessing file
+unmount /address

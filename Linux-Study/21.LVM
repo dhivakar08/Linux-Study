@@ -1,0 +1,170 @@
+LVM Configuration
+------------------
+
+1. Create PV using # pv create /dev/sda1 
+
+2. Verify the pv using # pvs
+
+3. Remove Physical volume 
+   # pvremove <removeing disk/ volume path>
+
+4. VG create using # vgcreate <vgname> <pv path>
+
+5. Verify vg using # vgs / # vgdisplay -v
+
+6. Extend the volume group 
+   # vgextend <vgname> <enter new pvpath>
+
+7. Reduce the volume group 
+   # vgreduce <vgname> <enter new pvpath>
+
+8. Rename the volume group 
+   # vgrename <old vg name> <new vg name>
+
+9. Volume group remove
+   # vgremove <vg name>
+
+10. Logical volume create
+   # lvcreate -n <lv name> -l  100%vg <vg name>      ----- 100%vg means it take full vg to convert lvm
+
+11.Create a Logical Volume (lvcreate) with a specified size
+   lvcreate -n <lv name> -L1G <vg name>
+
+12.lv extend
+   # lvextend <lvm path> -L+1000M -r    ---------- the -r option is specified as this will carry out a resize of the file system online.
+
+13.lv reduce
+   # lvreduce <lvm path> -L-1000M -r
+
+14.Checking lvm
+   # lvs / # lvdisplay -v
+
+ Formating and mount the lvm partitions
+ ---------------------------------------
+ 1. # mkfs.ext4  <lvm path>
+ 2. mount <lvm path> <mount path>
+
+What is LVM Migration?
+-----------------------
+LVM migration is one of the excellent feature, where we can migrate the logical volumes to a new disk without the data-loss and downtime. 
+The purpose of this feature is it to move our data from old disk to a new disk. 
+
+Features of Migration
+----------------------
+1.Moving logical volumes from one disk to other disk.
+
+2.We can use any type of disk like SATA, SSD, SAS, SAN storage iSCSI or FC.
+
+3.Migrate disks without data loss and downtime.
+
+Migrate LVM from one machine to another machine without data loss
+-----------------------------------------------------------------
+If you have a exsisting VM in server 1 like /dev/vg1/lvtest  mounted on /test
+
+1.Unmount the LVM
+
+2.Inactivate the VG using # vgchange -an <vgname>
+
+3.Export the VG using # vgexport <vgname>
+
+4.Power of the server and remove the HDD
+
+5.Attached the HDD to the target server 
+
+6.Using lsblk / fdisk -l command to verify the HDD is Attached 
+
+7.# vgscan   ----- This command used to verify the vg 
+
+8.# pvs
+
+9.vgimport <vgname>  ---- import the vg
+
+10.# vgs
+
+11.vgchange -ay <vgname> ---- activate the vg
+
+12.# lvs 
+
+13.Create one directory and mount the lvm
+
+Mirror Method
+-------------- 
+1.Create newly one disk and add to the server
+
+2.using lsblk / fdisk -l command to verify the newly added disk 
+
+3.# lvs / lvdisplay -v command to verify the old lvm details
+
+4.Before migrating, make sure to confirm the names of logical volume and volume group for which physical volume is related to 
+  and also confirm which physical volume used to hold this volume group and logical volume.
+  # vgs -o+devices | grep <vg name> 
+
+5.Create new physical volume using 
+  # pvcreate command and verify using # pvs
+
+6.Next, add the newly created physical volume to existing volume group tecmint_vg using ‘vgextend command’
+  # vgextend <vg name> <New volume path>
+  # vgs
+
+7. To get the full list of information about volume group use ‘vgdisplay‘ command.
+  # vgdisplay <vg name> -v
+
+8.If in-case, we need to know more information about which devices are mapped, use the ‘dmsetup‘ dependency command.
+  # lvs -o+devices
+  # dmsetup deps <lv path>
+
+9.In the above results, there is 1 dependencies (PV) or (Drives) and here 17 were listed. 
+  If you want to confirm look into the devices, which has major and minor number of drives that are attached.
+  # ls -l /dev | grep <old lvm volume lost 2 digit like ex: /dev/sda means put "da">
+
+10.Now it’s time to do migration using Mirroring method, use ‘lvconvert‘ command to migrate data from old logical volume to new drive.
+   # lvconvert -m 1 <lvm path> <new disk/volume path>   ---- here -m means mirror , 1 - means adding single mirror
+
+11.Once migration process completed, verify the converted mirror
+   # lvs -o+devices
+
+12.Once you sure that the converted mirror is perfect, you can remove the old virtual disk vdb1. 
+   The option -m will remove the mirror, earlier we’ve used 1 for adding the mirror.
+   # lvconvert -m 1 <lvm path> <old disk/volume path>
+
+13.Once old virtual disk is removed, you can re-check the devices for logical volumes using following command.
+   # lvs -o+devices
+   # dmsetup deps <lvm path>
+   # ls -l /dev | grep <new volume last 2 digit>
+
+14.Now verify the files that we’ve migrated from old to new drive. 
+   If same data is present at the new drive, that means we have done every steps perfectly.
+
+15.After everything perfectly created, now it’s time to delete the vdb1 from volume group and later confirm,
+   which devices are depends on our volume group.
+   # vgreduce <vg path> <old volume/disk path>
+   # vgs -o+devices
+   # lvs
+
+ LVM pvmove Mirroring Method
+---------------------------
+ Instead using ‘lvconvert’ mirroring command, we use here ‘pvmove‘ command with option ‘-n‘ (logical volume name) method to mirror data between two devices.
+ The command is one of the simplest way to mirror the data between two devices, but in real environment Mirroring is used more often than pvmove.
+ # pvmove -n <lvm path> <old disk path> <new disk path>
+
+--------------------------------------------------------------------------------------------------------------------
+
+ Restore the deleted lvm and vg 
+ ---------------------------------
+
+ 1. Before doing this process please take a backup of vg
+    # vgcfgbackup 
+ 
+ 2. cd /etc/lvm            ------- this is a ivm metadata path
+ 
+ 3. cp backup <safe place>
+ 
+ 4. #vgcfgrestore -l <vg name>
+ 
+ 5. # vgcfgrestore -f <restore path like : /etc/lvm/archive/test_00009-41396741.vg >  <vg name>
+ 
+ 6. # lvchange -ay <lvm path>
+ 
+ 7. # lvs to verify and mount
+
+ 8. VG restore also same procedure

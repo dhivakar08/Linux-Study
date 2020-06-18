@@ -1,0 +1,39 @@
+Patching
+---------
+
+A patch is a set of changes to a computer program or its supporting data designed to update, fix, or improve it. 
+This includes fixing security vulnerabilities and other bugs, with such patches usually being called bugfixes or bug fixes, 
+and improving the functionality, usability or performance.
+
+Why we have to Patching
+------------------------
+1.Securing data
+2.Bug fix
+3.Avoid cyber attack
+4.Improve performance of the server
+5.Fix security vulnerabilities
+
+Type of patches
+---------------
+1.Critical Updates
+2.Security Updates 
+3.Bug fixes 
+4.Enhancement 
+5.OS Updates 
+
+If you are patching one / two server means use yum update 
+If you have multiple server need to patch means using below mentioned utility
+
+Manage engine patch manager plus
+
+1.Download and install manage engine plus
+
+2.The default webconsole username and passwd is admin,admin
+
+3.click Agent Tab at the top and download linux agent copy to linux machine
+
+4.Click scan of the webconsole and scan the linux machine
+
+5.In the scan result select the Critical/important based on your priority select and install patche
+
+6.You have schedule option also we can schedule
