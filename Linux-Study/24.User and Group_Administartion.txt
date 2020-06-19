@@ -80,3 +80,28 @@ Type of users in linux
                       
  Note : After passwd expierey system will allow the user to change the passwd, 
         if you wnat to deny the passwd change option modify the /usr/bin/passwd file permission.
+
+ --------------------------------------------------------------------------------------------------------------------------------
+ Group creation
+ ---------------
+ The group configuration file is /etc/group
+ 1.Creating a group
+   # groupadd <groupname>
+ 
+ 2.Setting a passwd to the group
+   # groupmod -p <passwd>  <groupname>
+
+ 3.Add the group to the administrtaor group
+   # gpasswd -A <useranme>  <groupname> 
+
+ 4.Add multiple user at a time 
+   # gpasswd -M <user1><user2><user3> <groupname>
+
+ 5.Remove the user from the group
+   # gpasswd -d <username> <groupname>
+
+ 6.Change the id of the group
+   # groupmod -g <gid> <groupname>
+
+ 7.Change the groupname
+   # groupmod -n <new groupname>  <old groupname>
