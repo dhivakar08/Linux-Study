@@ -1,0 +1,80 @@
+File / Directory Permissions
+-----------------------------
+ 1.# ls -ltr
+   d - means Directory
+   r - means File
+   no - no of files contain the Directory
+
+ 2.Type of owners
+   1. user   u
+   2. group  g
+   3. others o
+
+ 3.Type of Permissions
+   1. Read    r  4
+   2. Write   w  2
+   3. Execute x  1
+
+ 4.Methods of permisssions
+   1.Symbolic Method  rwx
+   2.Numerical Method 421 
+
+ Note: If you are create a file / directory they will get some permission based on umask value
+
+ 4.Change the file permission using # chmod command
+   # chmod 777 <file / directory name>
+   # chmod u+x <file /directory name>
+   # chmod ugo+rwx <file /directory name>
+
+ 5.Change the file permission inside the directory files
+   # chmod -R 770 <directory name>                         ---- R recursively
+
+ Umask values
+ --------------
+  Temporavary basis
+  ------------------
+
+ 1.If you are creating a file / directory they will automatically get some permission
+   The default value of the file is 666 and the directory is 777
+   # umask    --- the output is 0002
+ 
+   Ex : newly create one file and type # ls -ltr
+       The permission is rw-rw-r 
+       Ex : rw-rw-r - 002  (umask value you calculate right to left)
+
+  Directory listing using 
+  # ls -ld
+
+ 2.If you want set / modify umask 
+   # umask 0000   ---- full permission to the dir rw to file
+
+ Permanent basis
+ ----------------
+ Make a entry with /etc/profile file
+
+ ------------------------------------------------------------------------------------------
+ 
+ ACL - Access control list
+ --------------------------
+ 
+ Access ACLs: we can use access ACLs to grant permissions for a particular file or directory.
+ 
+ 1.Verify the ACL permissions 
+   # getfacl <file / directory name>
+
+ 2.Give ACL permission to the user
+   # setfacl -m u:<username>:<permission like rwx>  <file / directory name>
+   # getfacl  <file/directory name> to Verify
+ 
+ 3.Give ACL permission to the group
+   # setfacl -m g:<groupname>:<permission like rwx>  <file / directory name>
+ 
+ 4.Rmove ACL permission to the user
+   # setfacl -m u:<username>:---  <file / directory name>     ----- here --- remove all the permission
+
+ 5.How to copy / repilicate the permission from one directory to another directory
+   # getfacl --access <which directory to replicate like from directory> | setfacl -d -M- <to directory>
+    
+ 6.How to copy / repilicate the permission from one file to another file
+   # getfacl /yt <which file to replicate like from file> | setfacl --set-file=- <to file>
+    
