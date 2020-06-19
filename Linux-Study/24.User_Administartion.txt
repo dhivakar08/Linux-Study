@@ -1,0 +1,82 @@
+User
+-----
+User -- using the system resources and do their work at the minimal timing
+In linux users are idetified by UID - user idetified id
+The #id command will provide the information about particular user
+# id <username>
+
+Type of users in linux
+-----------------------
+1.Super User / Administrator / root  ---- the super user UID is 0
+
+2.Normal users ---- which are created by administrator /root user 
+  The normal user UID starting from 1000 - 60000 in RHEL7 pervious versions starting from 500
+
+3.System user / service account ---- along with the package to create a user like vsftpd user
+  The system - service users id's are start from 201 - 999
+
+4.Create a user on the system
+  ----------------------------
+  When ever you create a user below files are mobilfied
+  1./etc/passwd  --- it contain user information
+  2./etc/shadow  --- it contain passwd information 
+  3./etc/group   --- it contain group information 
+  4./etc/skel    ----it contain hidden files using ls -la | you want to copy the file to all the user home directory,
+                     create the file in this location 
+  
+  The user information has fetch from /etc/default/useradd  
+  The above the file i can able to mention the user EXPIER date also
+  
+  # useradd <user name>
+  # passwd <user name>
+
+  5.customize user creation
+    g - primary group
+    G - secondary group
+    u - UID
+    d - home directory path
+    s - shell
+    e - expierey date
+    p - passwd
+    c - comment for the user 
+  # useradd -u 2000 -g test1 -G dhivakar,raja -c "user for RHCSA" -s /bin/bash -e 2020-07-10 -d /etc/test -p pass@123 rhsca --- rhsca is username 
+
+ 5. Changing Username 
+   # usermod -l <new name> <old name>
+
+ 6. Add the user to the secondary group
+    # usermod -aG  <group names> <username>           ------ a means appending
+ 
+ 7. Add the user to the primary group
+    # usermod -g  <group names> <username>            ------- there is no appending in primary group
+
+ 8. Lock the user 
+    # usermod -L  <username>    
+    For verify /etc/shadow see the username :! (exclametry mark) means user locked
+
+ 9. Unlock the user
+    # usermod -U  <username>                          -------- U to unlock the user
+ 
+ 10.Change the user shell path 
+    # usermod -s /sbin/bash  <username>               ------- user cannot execute the shell but we can swith the user
+
+ 11.Inactivate the user
+    # usermod -f  <username>
+
+ 12.Set the passwd expierey date
+    # usermod -e <mention expierey date>  <username> 
+
+ 13.Get the  passwd information for particular user
+    # chage -l <username>
+
+ 14.Set the passwd expierey date customization
+    # chage -m 0 -M 90 -W 10 -E 2020-07-28  <username>   ----- -m minimun no of days -M maximum no of days -W warning -E expierey date
+
+ 15.Every 10 days user change the passwd
+    # chage -M 10 <username>
+
+ 16.How to Lock User Accounts After Failed Login Attempts
+    Make a entry with # vi /etc/pam.d/system-auth & # vi /etc/pam.d/password-auth files
+                      
+ Note : After passwd expierey system will allow the user to change the passwd, 
+        if you wnat to deny the passwd change option modify the /usr/bin/passwd file permission.

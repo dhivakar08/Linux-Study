@@ -1,0 +1,19 @@
+File system commands
+----------------------
+1.Checking Kernal version
+  # cat /etc/redhat-release 
+
+2.List the disks
+  # fdisk -l 
+
+3.Checking the filesystem and mountpoint
+  # df -Th 
+
+4.file system with UUID
+  # file -sL /dev/sda1
+
+5.file system uuid checking ------------*****
+  # blkid /dev/sda1
+
+6.file system detail information
+  # lsblk -fs
