@@ -29,6 +29,25 @@ File / Directory Permissions
  5.Change the file permission inside the directory files
    # chmod -R 770 <directory name>                         ---- R recursively
 
+ 6.Delete the users from the group
+   # userdel -r  <user name>
+   # gpasswd -d <username> <groupname>
+
+ 7.Provide Administrator rights
+   # gpasswd -A <username> <groupname>
+
+ 8.Delete the group
+   # groupdel <groupname>
+
+ 9.Change the group name
+   # groupmod -n <newname> <oldname>
+
+ 10.Change the owner permissions
+    # chown <username>:<group name>  <file / directory name>
+
+ 11.Symbolic permission
+    # chmod g+w <file name>   | remove permisson #chmod g-w <file name>
+
  Umask values
  --------------
   Temporavary basis
@@ -40,7 +59,7 @@ File / Directory Permissions
  
    Ex : newly create one file and type # ls -ltr
        The permission is rw-rw-r 
-       Ex : rw-rw-r - 002  (umask value you calculate right to left)
+       Ex : rw-rw-r - 002  (umask value you calculate right to left / leave first value)
 
   Directory listing using 
   # ls -ld
@@ -48,9 +67,54 @@ File / Directory Permissions
  2.If you want set / modify umask 
    # umask 0000   ---- full permission to the dir rw to file
 
- Permanent basis
- ----------------
+ 3.Note : In linux files defaultly no execute permission
+          In directory having fill permission because there is no execute permission means you not enter the directory
+
+ Permanently change the umask value 
+ ----------------------------------
  Make a entry with /etc/profile file
+
+ Set-user Identification (SUID)
+ ------------------------------
+ SUID default value is 4 
+
+ 1.Setting the SUID
+   # chmod 4660 <file / directory name>
+
+ 2.Removing the SUID for removeing the permission using "s"
+   # chmod u-s <file / directory name>
+  
+ SGUID
+ -----
+ The Set Group ID (SGID) bit is very similar to the SUID bit. When the SGID bit is set on an executable file, 
+ the effective group is set to the group of the file. 
+
+ SGUID default value is 2
+
+ 1.Setting the SGUID
+   # chmod 2660 <file / directory name>
+
+ 2.Removing the SUID for removeing the permission using "s"
+   # chmod g-s <file / directory name>
+
+ Sticky Bit
+ -----------
+ 1.The sticky bit is primarily used on shared directories.
+ 2.It is useful for shared directories such as /var/tmp and /tmp because users can create files, read and execute files owned by other users, but are not allowed to remove files owned by other users.
+ 3.For example if user bob creates a file named /tmp/bob, other user tom can not delete this file even when the /tmp directory has permission of 777. 
+   If sticky bit is not set then tom can delete /tmp/bob, as the /tmp/bob file inherits the parent directory permissions.
+ 4.root user (Off course!) and owner of the files can remove their own files.
+
+  - T refers to when the execute permissions are off.
+  - t refers to when the execute permissions are on.
+
+  Stickbit default value is 1
+
+ 5.Setting the Stickybit
+   # chmod 1660 <file / directory name>
+
+ 6.Removing the Stickybit for removeing the permission using "s"
+   # chmod g-T <file / directory name>
 
  ------------------------------------------------------------------------------------------
  
