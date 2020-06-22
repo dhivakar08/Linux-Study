@@ -33,11 +33,33 @@ LVM Configuration
 12.lv extend
    # lvextend <lvm path> -L+1000M -r    ---------- the -r option is specified as this will carry out a resize of the file system online.
 
+  Note : if extend the lv it will not display the df -h beacause we are not give the file system type of extended space
+         # resize2fs  <lvm path>
+
+ If you want xfs file system using # xfs_growfs <lvm path>
+
+ For using extens using  -l    | -L for size -l for extens
+
+
+LV reduce
+---------
+
+ Before reduce take a backup of the lvm and unmount from fstab
+ 
+  Note : # e2fsck -f <lvm path> check the file system is fine / crashed
+
 13.lv reduce
    # lvreduce <lvm path> -L-1000M -r
 
 14.Checking lvm
    # lvs / # lvdisplay -v
+
+15.# pvdisplay -m  -------- will provide more information about extend
+
+Extends
+-----------
+The extents are nothing but your hole PV is devided in to 4mb of different slots called extents
+Multiply of extents size and extents count you will get the PV size
 
  Formating and mount the lvm partitions
  ---------------------------------------

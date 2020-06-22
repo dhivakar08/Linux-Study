@@ -1,0 +1,37 @@
+OpenSSH (Secure Shell) Server and Client Configuration 
+-------------------------------------------------------
+How SSH works
+4 steps for ssh working method
+1. A cryptographic handshake is made so that the client can verify that it is communicating with the correct server.
+2. The transport layer of the connection between the client and remote host is encrypted using a symmetric cipher.
+3. The client authenticates itself to the server.
+4. The client interacts with the remote host over the encrypted connection
+
+1. # yum install openssh-server* -y
+
+2. systemctl status sshd 
+
+3.SSH default configuration file location
+  /etc/ssh/sshd_config
+
+4.If you want to allow only specific group of users make a entry with ssh file bottom like
+  AllowGroups sshusers
+
+5.Login ssh users in terminal
+  ssh <username>@<ip address>
+
+6.Edit the banner file
+  ---------------------
+  vim /etc/issue.net      ----- make a banner based on your requirement
+
+ Key Based Authentications
+ ---------------------------
+7.Normally the key files are stored in .ssh location
+
+8.Create a ssh key using
+  # ssh-keygen -t rsa  ------- enter enter
+
+9.Basically create a keypair in client end and copied to server using ssh copyid command
+  # ssh-copy-id <username>@server ip
+  
+10.After go the server .ssh folder and verify authoried.keys file created open and verify using client key both are same

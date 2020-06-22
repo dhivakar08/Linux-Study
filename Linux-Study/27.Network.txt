@@ -1,0 +1,36 @@
+ Nmcli
+ -------
+ nmcli is a command-line tool for controlling NetworkManager and reporting network status. 
+ It can be utilized as a replacement for nm-applet or other graphical clients. 
+ nmcli is used to create, display, edit, delete, activate, and deactivate network connections, 
+ as well as control and display network device status.
+
+ 1.nmcli general status   ---it show which are the connectivity is enabled
+ 2.nmcli dev status   ----- how many device are currently connected / idle information
+
+ More trouble shooting process
+ -------------------------------
+ 3.nmcli device show <interface name>  --- it give lot off additional informational
+
+ 4.nmcli connnection show  ---- how many device / profile are activated
+
+ Make a new connection using nmcli
+ ---------------------------------
+ 5.nmcli connection add con-name Home ifname enth0s3 type ethernet 
+
+ Delete the connection
+ --------------------
+ 6.nmcli connection delete <connection name>
+
+ modify the connection
+ ----------------------
+ 7.nmcli connection modify enp0s3 ipv4.address 192.168.0.37/24 ipv4.gateway 192.168.1.1 ipv4.dns 192.168.0.24 
+   +ipv4.dns 4.4.4.4 connection.autoconnection yes
+
+ configuration file location
+ ------------------------------
+ /etc/sysconfig/network-scripts/ifcfg-<profile name>
+
+ 8.nmcli connection up <connection name>
+
+ 9.nmcli connection down <connection name>
