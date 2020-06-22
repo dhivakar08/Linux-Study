@@ -5,6 +5,118 @@
  nmcli is used to create, display, edit, delete, activate, and deactivate network connections, 
  as well as control and display network device status.
 
+ Network-Commands
+ -----------------
+ 1.IP address display
+   1. # ip a 
+   2. # ip addr show <interface name> 
+   3. The ip com mand may also be used to show statistics a bout network performance. The received
+      (RX) and transmitted (TX) packets, errors, and d ropped cou nters can be used to identify network
+      issues caused by congestion, low memory, and overruns 
+      # ip -s link show <interfacename>
+   4. # ip route   ---- checking network route trace
+   5. The ping command is used to test connectivity. The command will continue to run until a
+      Control - C is pressed unless options are given to limit the number of packets sent.
+      #  ping - c3  172 . 25 . X . 254
+   6. To trace the path to a remote host, use either trace route or tracepath. Both commands can
+      be used to trace a path with UDP packets
+      # tracepath access . redhat .com
+
+  2.Troubleshooting ports and services
+    1.The ss command is used to display socket statistics. It is similar to the net stat command,
+      which is also available but may not be installed by default
+      # ss -ta           ------ this command output The " * " is used to represent " all "
+
+  3.Options for ss and netstat
+    
+    -n = Show numbers instead of names for interfaces and ports.
+    -t = Show TCP sockets
+    -u = Show UDP sockets
+    -l = Show only listening sockets
+    -a = Show all sockets
+    -p = Show the process of using sockets
+
+   Configuring Networking with nmcli
+   ----------------------------------
+   Network NetworkManager
+   ----------------------
+   Network Manager is a daemon that monitors and manages network settings.
+   Command-line and graphical tools talk to Network Manager and save configuration files in the
+   /etc/sysconfig/network-scripts  directory
+
+   Viewing network information with nmcli
+   ---------------------------------------
+   1.To display a list of all connections, use nmcli con show. To list only the active connections, add the --active option.
+     # nmcli con show
+     # nmcli con show --active
+
+   2.Specify a connection ID (name) to see the details of that connection
+     # nmcli con show enp0s3
+
+   3.The nmcli command can also be used to show device status and details
+     # nmcli dev show
+     # nmcli dev show enp0s3
+
+   Creating network connections with nmcli
+   ----------------------------------------
+   When creating a new con nection with nmcli, the order of the arguments is important. 
+   The common arguments appear first and must include the type and interface. 
+    1. # nmcli con add con-name "default " type ethernet ifname eth0
+    
+    2.Create a new connection named "static" and specify the IP address and gateway. Do not auutoconnect.
+      # nmcli con add con-name " static " ifname eth0 autoconnect no type ethernet ip4 172.25.X.10/24 gw4 172.25.X.254
+
+    3.Connection up 
+      # nmcli con up static
+
+   Note : If the static connection is lost, the default connection will attempt to autoconnect. 
+   To administratively disable an interface and prevent any autoconnection, use nmcli dev disconnect DEVICENAME.
+
+   Modifying network interfaces with nmcli
+   ---------------------------------------
+    1.Turn off autoconnect.
+      # nmcli con mod " static " connection.autoconnect no
+
+    2.Specify a DNS server.
+      # nmcli con mod " static " ipv4.dns 172.25.X.254
+
+    3.Add a +/- symbol infront of the argument. Add a secondary DNS server.
+      # nmcli con mod " static " +ipv4.dns 8.8.8.8
+
+    4.Replace the static IP address and gateway
+      # nmcli con mod " static " ipv4.addresses " 172.25.X.10/24 172.25.x.254 "
+
+    5.Add a secondary IP address without a gateway.
+      # nmcli con mod " static" +ipv4.addresses 10.10.10.10/16
+
+   Editing Network Configuration Files
+   ------------------------------------
+   It is also possible to configure the network by editing interface configuration files. 
+   Interface configuration files control the software interfaces for individual network devices.
+   These files a reusually named /etc/sysconfig/network-scripts/ifcfg-<name>, where <name> refers
+   to the name of the device or connection that the configuration file controls.
+
+   After modifying the configuration files, run nmcli con reload to make NetworkManager read the configuration changes.
+   # nmcli con reload
+   # nmcli con down static
+   # nmcli con up static
+
+   Configuring Host Names and Name Resolution 
+   -------------------------------------------
+    1.The hostname command displays or temporarily modifies the system's fully qualified hostname.
+      # hostname
+
+    2.A static hostname may be specified in the /etc/host name file. The hostnamectl command is used to modify this file 
+      and may be used to view the status of the system's fully qualified hostname.
+      # hostnamectl set-hostname desktopX.example.com
+      # hostnamectl status
+
+    3.Hostfile location : /etc/hosts
+
+    Note : The static host name is stored in /etc/hostname.  
+           Previous versions of Red Hat Enterprise Linux stored the host name as a variable in the /etc/sysconfig/network file.
+
+  -----------------------------------------------------------------------------------------------------------------------
  1.nmcli general status   ---it show which are the connectivity is enabled
  2.nmcli dev status   ----- how many device are currently connected / idle information
 
