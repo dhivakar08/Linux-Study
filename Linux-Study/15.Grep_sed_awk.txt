@@ -1,3 +1,24 @@
+
+ Grep -  Regular expression
+ -----------------------------
+
+ 1.Use a ^ beginning of line anchor or $, an end of line anchor
+ 2.Regular expressions use a . as the un restricted wildcard character Ex:c.t means cqt.cot ..etc
+ 3.If users wanted to only match the words cat. cot, and cut. but not odd items like c5t or cQt, 
+   replace the unrestricted wildcard with one where acceptable characters are specified. 
+   If the regular expression was changed to #  c[aou]t
+
+ grep is a command provided as part of the distribution which utilizes regular expressions to isolate matching data.
+ 
+ grep usage
+ ----------
+ The basic usage of grep is to provide a regular expression and a file on which the regular expression should be matched.
+ Ex : grep ' cat$ ' /usr/share/dict/words
+
+ grep can be used in conjunction with other commands using a |  
+  Ex : ps aux | grep '^student'
+
+
 1. Search for the given string in a single file 
    grep [search word] [filename]
 
@@ -35,6 +56,8 @@
 11. Show line number while displaying the output using grep -n
      grep -ni how file
 
+12. If you want to search more then one word using -e option
+    # grep -e <wordone> -e <wordtwo> <filename>
 --------------------------------------------------------------------------------------------
 SED-Command
 ------------
