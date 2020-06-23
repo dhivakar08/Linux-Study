@@ -31,7 +31,35 @@ How SSH works
 8.Create a ssh key using
   # ssh-keygen -t rsa  ------- enter enter
 
-9.Basically create a keypair in client end and copied to server using ssh copyid command
+9.Copy the pub key to server
+  # mkdir .ssh
+  # chmod 700 .ssh                   ----- same permission is importent to work
+  # touch authorized_keys            ----- same permission is importent to work
+  # chmod 600 authorized_keys 
+  copy and past the pub file contenet to authorized_keys file and save
+
+10.Basically create a keypair in client end and copied to server using ssh copyid command
   # ssh-copy-id <username>@server ip
   
-10.After go the server .ssh folder and verify authoried.keys file created open and verify using client key both are same
+11.After go the server .ssh folder and verify authoried.keys file created open and verify using client key both are same
+
+12.The # w -f command used to check which users are currently logged in the system.
+   # w -f
+
+Prohibit the root user from logging in using SSH
+--------------------------------------------------
+1. Open sshd_config file
+   # vim /etc/ssh/sshd_config
+
+2.modify #permitRootlogin yes to   permitRootlogin no 
+
+3.Restart sshd service
+
+4.# Service sshd restart
+ 
+5.Another option is to only allow key-based ssh login as root 
+  # PermitRootLogin without-password    ---- add this line in configuration file
+
+Prohibit password authentication using SSH
+--------------------------------------------
+Enable PasswordAuthentication yes
