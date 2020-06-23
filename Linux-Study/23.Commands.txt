@@ -34,3 +34,6 @@ File system commands
 
 11.Checking disk space
    # df -Th
+
+12.Check the kernel version
+   # uname -r

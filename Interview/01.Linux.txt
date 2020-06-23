@@ -1,0 +1,112 @@
+1.What is LILO?
+  LILO is a boot loader for Linux. It is used mainly to load the Linux operating system into main memory 
+
+2.What is a swap space?
+  Swap space is a certain amount of space used by Linux to temporarily hold some programs that are running concurrently. 
+  This happens when RAM does not have enough memory to hold all programs that are executing.
+
+3.How can you find out how much memory Linux is using?
+  # cat /proc/meminfo
+  # free - m
+
+4.What is a typical size for a swap partition under a Linux system?
+  The preferred size for a swap partition is twice the amount of physical memory available on the system. 
+  If this is not possible, then the minimum size should be the same as the amount of memory installed.
+
+5.How do you refer to the parallel port where devices such as printers are connected?
+  Whereas under Windows you refer to the parallel port as the LPT port, under Linux you refer to it as /dev/lp . 
+  LPT1, LPT2 and LPT3 would therefore be referred to as /dev/lp0, /dev/lp1, or /dev/lp2 under Linux.
+
+6.What is the maximum length for a filename under Linux?
+  Any filename can have a maximum of 255 characters. This limit does not include the path name,
+  so therefore the entire pathname and filename could well exceed 255 characters.
+
+7.What are environmental variables?
+  Environmental variables are global settings that control the shell's function as well as that of other Linux programs. 
+  Another common term for environmental variables is global shell variables.
+
+8.What are the different modes when using vi editor?
+  1.Insert 2.Edit 3.Esc
+
+9.What is redirection?
+  Redirection is the process of directing data from one output to another. 
+  It can also be used to direct an output as an input to another process.
+
+10.What is grep command?
+   grep a search command that makes use of pattern-based searching.
+   It makes use of options and parameters that are specified along with the command line and applies this pattern in searching the required file output.
+
+11.What is the command to calculate the size of a folder?
+   To calculate the size of a folder uses the command du –sh folder1.
+
+12.How can you find the status of a process?
+   Use the command # ps ux
+
+13.What are the contents of /usr/local?
+   The /usr/local directory contains the locally installed files.
+   The importance of the directory is when files are stored on some network.
+   The directory is used for storing software packages installed from a source or software not officially accompanying the distribution.
+
+14.Seven Types of linux files
+    1.- : regular file            
+          The regular file is a most common file type found on the Linux system.
+          text files, images, binary files, shared libraries, etc. You can create a regular file with the touch command
+    2.d : directory
+          Directory is second most common file type found in Linux. Directory can be created with the mkdir command
+    3.c : character device file
+          Character and block device files allow users and programs to communicate with hardware peripheral devices. 
+    4.b : block device file
+          Block devices are similar to character devices. They mostly govern hardware as hard drives, memory, etc. # ls -ld /dev/sda
+    5.s : local socket file
+          Local domain sockets are used for communication between processes. Generally, 
+          they are used by services such as X windows, syslog and etc. # ls -ld /dev/log
+    6.p : named pipe
+          Similarly as Local sockets, named pipes allow communication between two local processes. 
+          They can be created by the mknod command and removed with the rm command.
+    7.l : symbolic link
+          With symbolic links an administrator can assign a file or directory multiple identities. 
+          Symbolic link can be though of as a pointer to an original file. There are two types of symbolic links: Hard / soft link
+
+15.Inode number
+   An inode is an entry in inode table, containing information ( the metadata ) about a regular file and directory.
+   An inode is a data structure on a traditional Unix-style file system such as ext3 or ext4.
+   Inode number also called index number, it consists following attributes
+   
+   1.File types ( executable, block special etc )
+    1.Permissions ( read, write etc )
+    2.UID ( Owner )
+    3.GID ( Group )
+    4.FileSize
+    5.Time stamps including last access, last modification and last inode number change.
+    6.File deletion time
+    7.Number of links ( soft/hard )
+    8.Location of ile on harddisk.
+    9.Some other metadata about file.
+  
+  2.Check Inodes on Filesystem
+    # df -i /dev/sda1
+    Note : In case of inodes full on any filesystem, you can’t create a new file on disk even you have enough free space. 
+
+  3.Find Inode number of File
+    # ls -il  myfile.txt
+
+  4.When you are copy a file from one location to another location inode number will change for move are rename the file no impact.
+
+  5.Free Inodes on Filesystem
+    In the case of inodes are full. You need to remove unused files from the filesystem to make Inode free. 
+    There is no option to increase/decrease inodes on disk.
+    It only created during the creation of filesystem on any disk.
+
+  6.Changing Inode
+    The only way to change the inode copy the file from one location to another there is no other way to change.
+
+16.What is Sticky Bit?
+   The sticky bit is used to indicate special permissions for files and directories.
+   If a directory with sticky bit enabled will restrict deletion of the file inside it. 
+   It can be removed by the root, owner of the file or who have to write permission on it. 
+   This is useful for publically accessible directories like /tmp.
+
+   chmod +t tecadmin.txt
+   chmod 1777 tecadmin.txt
+
+   Same for user SUID group using SGID
