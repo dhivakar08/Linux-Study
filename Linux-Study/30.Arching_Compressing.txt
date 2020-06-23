@@ -1,0 +1,57 @@
+Arching
+-------
+archive file is a collection of files and directories stored in one file. The archive file is not compressed 
+it uses the same amount of disk space as all the individual files and directories combined.
+
+1.tar -cvf <enter archiname with .tar> <source file destination>
+  Here c - create v - verbose (all files) f(file)
+
+2.Update the archive file (alreday created archi you need to update one more file)
+  # tar -uvf <name of the archive.tar> *.txt
+
+Note : you cannot update the compressed files
+
+3.Extract the archive files
+  # tar -xvf <file name>
+
+Compressing
+-----------
+A compressed file is a collection of files and directories that are stored in one file and stored 
+In a way that uses less disk space than all the individual files and directories combined. 
+ If disk space is a concern, compress rarely-used files, or place all such files in a single archive file and compress it.
+
+ Three types of zip method
+ --------------------------
+ 1.gzip -- gunzip - gz
+ 2.bzip -- bunzip - j bz2   
+ 3.Normal zip 
+
+ gzip vs bzip2: bzip2 takes more time to compress and decompress than gzip. bzip2 archival size is less than gzip.
+ Note: .tbz and .tb2 is same as .tar.bz2
+
+ The three types do all the fuctionality is same but algorithm is different
+
+ 1.Checking current directory size
+   # du -sh <path>
+
+ 2.Gun zip method 
+   # tar -cvzf <enter archiname with .tar.gz> <source file destination>  ---- create
+   # tar -xvzf <file name>    ---- extract
+
+ 3.Bun zip method
+   # tar -cvjf <enter archiname with .tar.bz2> <source file destination>  ---- create
+   # tar xvfj archive_name.tar.bz2
+
+ 4.Zip the file
+   # zip <test.zip> <file>
+   # zip -r  <test.zip> <directory>      ----- zip the directory
+   # zip -d <file name>                  ----- delete the file
+   # unzip <file name>
+
+ 5.View the tar archive file content without extracting using option tvf
+   # tar tvf archive_name.tar
+
+ 6.Extract a single file from tar, tar.gz, tar.bz2 file
+   To extract a specific file from a tar archive, specify the file name at the end of the tar xvf command
+   # tar xvf archive_file.tar /path/to/file
+   # tar xvf archive_file.tar /path/to/dir/     ---- directory

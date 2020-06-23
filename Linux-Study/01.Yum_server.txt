@@ -60,7 +60,7 @@ command in yum for regular usages:
 
 3. Checking for particular pacakes installed with their depandancies
 
-# yum list | grep java           --- if packages start with @ is installed, @ not means not yet installed
+# yum list | grep java           --- if packages start with @ is installed, @ not means not yet installed  | use # yum list installed
 
 4. remove particular packages in yum 
 

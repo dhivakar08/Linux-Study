@@ -1,0 +1,21 @@
+SCP
+-----
+Securely copy the data to remote server was made easy using scp command.
+
+1.scp <file / directory needs to copy> <user name@destinaition server ip>: <specify the path where you need to copy>
+
+2.Enter "yes"
+
+3.Enter remote server passwd
+
+4.Copy a entier directory
+  # scp -r <directory name> <destinaition>
+
+5.Compress the data and copy
+  # scp -C <file name> <destinaition>
+
+6.Copy the data using time stamp
+  # scp -vp <file / directory> <destinaition>
+
+7.Limit the bandwidth
+  # scp -l <bandwith size in kb> <file / directory> <destinaition>

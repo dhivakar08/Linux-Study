@@ -12,7 +12,7 @@ Types of logs
 --------------
 1.syslog     - UDP
 2.syslog-ng  - TCP & TLS security
-3.rsyslog    - RELV                 | conf : /etc/rsyslog.conf
+3.rsyslog    - RELV                 | conf : /etc/rsyslog.conf          ------- This file having the information about the logs where is go to save
 
 1./var/log/messages - related to authentication & emails,cron jobs etc
 2./var/log/secure   - related to security & authentication related messages & errors - like ssh
@@ -55,3 +55,53 @@ Timedatectl
 3. Enable the NTP server
    timedatectl set-ntp true 
 4. timedatectl set-time <enter the time like 09:09:09>
+
+ Syslog :
+ --------
+ syslog server is used to store logs and analyze them. 
+ Based on criticality act on the events so that you can reduce the problems in server.
+
+ Syslog server configuration
+ ----------------------------
+ 1.# yum install rsyslog* -y
+
+ 2.systemctl status rsyslog.service
+
+ 3.Configuration file is  /etc/rsyslog.conf
+   
+ 4.In the configuration file uncomment TCP / UDP syslog reception
+   # Provides UDP syslog reception
+      $ModLoad imudp
+      $UDPServerRun 514
+   # Provides TCP syslog reception
+      $ModLoad imtcp
+      $InputTCPServerRun 514
+
+  5.Save the configuration file and restart the services
+
+  6.Note : the default port no of the syslog server is 514
+
+  7.# firewall-cmd --permanent --add-port=514/TCP
+    # firewall-cmd --permanent --add-port=514/UDP
+
+  8.# firewall-cmd --reload
+
+  9.Verify the port is opened / not using 
+    # netstat -antup | grep 514
+
+  Client side configuration
+  --------------------------
+  1.Ping the server ip and client ip to server 
+
+  2.Configure the firewall permanent same as server entry
+
+  3.Edit the rsyslog configuration file
+    Search the #*.* @@remote-host:514 line uncomment and replace the remot -host provide the server ip
+
+  4.Systemctl restart rsyslog.service
+
+  5.Go to the server # cat /var/log/secure      ---- the client logs are stored here
+
+
+
+

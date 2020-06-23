@@ -17,3 +17,20 @@ File system commands
 
 6.file system detail information
   # lsblk -fs
+
+7.Checking swap memory 
+  # free -m
+  # swapon -s <swap partition path>
+
+8.Checking CPU information
+  # cat /proc/cpuinfo
+
+9.Checking Memory information
+  # cat /proc/memoryinfo
+
+10.Checking disk space of particular directory
+   # du -sh
+   # du -sh *
+
+11.Checking disk space
+   # df -Th

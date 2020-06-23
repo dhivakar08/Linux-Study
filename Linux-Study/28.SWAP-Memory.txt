@@ -1,0 +1,27 @@
+Swap Memory
+-----------
+Swap memory in Linux ( swap file system) in Linux is used when the amount of RAM (Physical Memory) is Full. 
+If system needs more memory resources and the RAM (Physical Memory) full, inactive pages in memory are moved to Swap Space.
+
+Note: Create a swap space consider double size of your Physical memory
+      Ex : My Physical memory is 4 GB means my swap space is 8 GB
+           If your Physical memory is more than 64 GB swap is 32 is enough
+
+Creating Swap memory
+--------------------
+1.Checking memory status
+  # free -m             ---- it will display the both swap and Physical memory used and available size
+
+2.Create on partition after that command for help enter t and enter 82 and save
+
+3.# partprobe command used to update the kernel table
+
+4.Convert the partition to swap file system
+  # mkswap <partition path>
+
+5.Vi /etc/fstab
+  <partition path>  swap (because swap doesnot have any mount point) swap defaults 0 0
+
+6.# swapon <partition path>    ------- it used to on the swap partition
+
+7.# swapoff <partition path>   ------- it used to off the swap partition

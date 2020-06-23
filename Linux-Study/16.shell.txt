@@ -1,6 +1,11 @@
 Shells is Linux
 ----------------
 
+Which command is used to check the SHELL in used   ------- important question microland
+
+1.# echo $SHELL
+2.# ps -p$$
+
 Types of Shells
 
 1.Bourne shell (sh)
