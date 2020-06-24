@@ -146,3 +146,99 @@
  8.nmcli connection up <connection name>
 
  9.nmcli connection down <connection name>
+
+------------------------------------------------------------------------------------------------------------------------
+Network Teaming 
+----------------
+Use network teaming or bonding to configure aggregated network links between two Red Hat Enterprise Linux systems.
+ 
+configuration -  man teamd.conf
+
+Teaming Mechanisum
+--------------------
+1.Roundrobin
+2.Load balancing
+3.Active Backup
+4.Broadcast
+
+1.Active Backup configuration
+------------------------------
+ Active Backup - Watches for link changes and selects active port to be used for data transfers.
+
+ 1.Configure team we must have more then one NIC
+
+ 2.# ifconfig / ip link to verify the NICs 
+
+ 3.Creat master team
+  # nmcli con add con-name team type team ifname team config '{"runner":{"name": "activebackup"}}'
+  # man teamd.conf ------- file to verify the configuration syntax
+  # nmcli con show  ------ to verify
+ 4.Create slave1 configuration
+  # nmcli con add con-name team-slave1 type team-slave ifname <new interface name like enp0s8> master team connection.autoconnect yes
+  # nmcli con show 
+
+ 5.Create slave2 configuration
+  # nmcli con add con-name team-slave2 type team-slave ifname <new interface name like enp0s9> master team connection.autoconnect yes
+  # nmcli con show 
+
+ 6.# nmcli con up team
+
+ 7.# teamdctl team state    ------- using this command to verify the team status
+
+ 8.If you want to down any team-slave1 using below this command
+  # nmcli con down team-slave1
+
+2.Load Balance configuration
+-----------------------------
+ Load Balance - To  do  passive  load  balancing, runner only sets up BPF hash function which will determine port for packet transmit. To do
+                active load balancing, runner moves hashes among available ports trying to reach perfect balance.
+
+ 1.Creat master team
+  # nmcli con add con-name team type team ifname team config '{"runner":{"name": "loadbalance"}}'
+  # nmcli con show
+
+ 2.slave creation step same as active backup method
+
+ 3.# nmcli con modify ipv4.address <ip>/24 ipv4.method manual connection.autoconnect yes
+
+ 4.# nmcli con up team
+
+ 5.# ifconfig ----- to check the team ip and ping the ip
+
+ 6.# teamdctl team state  ---- to verify the team state
+
+3.Round robinn configuration
+-----------------------------
+ Round robin -  Simple runner which directs the team device to transmits packets in a round-robin fashion.
+
+ 1.Creat master team
+  # nmcli con add con-name team type team ifname team config '{"runner":{"name": "roundrobin"}}'
+  # nmcli con show
+
+ 2.slave creation step same as active backup method
+
+ 3.# nmcli con modify ipv4.address <ip>/24 ipv4.method manual connection.autoconnect yes
+
+ 4.# nmcli con up team
+
+ 5.# ifconfig ----- to check the team ip and ping the ip
+
+ 6.# teamdctl team state  ---- to verify the team state
+
+4.Broadcast configuration
+-----------------------------
+ Broadcast -  Simple runner which directs the team device to transmit packets via all ports.
+
+ 1.Creat master team
+  # nmcli con add con-name team type team ifname team config '{"runner":{"name": "broadcast"}}'
+  # nmcli con show
+
+ 2.slave creation step same as active backup method
+
+ 3.# nmcli con modify ipv4.address <ip>/24 ipv4.method manual connection.autoconnect yes
+
+ 4.# nmcli con up team
+
+ 5.# ifconfig ----- to check the team ip and ping the ip
+
+ 6.# teamdctl team state  ---- to verify the team state
