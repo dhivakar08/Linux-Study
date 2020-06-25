@@ -148,8 +148,8 @@
  9.nmcli connection down <connection name>
 
 ------------------------------------------------------------------------------------------------------------------------
-Network Teaming 
-----------------
+Network Teaming / Bonding
+--------------------------
 Use network teaming or bonding to configure aggregated network links between two Red Hat Enterprise Linux systems.
  
 configuration -  man teamd.conf

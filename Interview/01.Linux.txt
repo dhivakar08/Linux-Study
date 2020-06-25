@@ -110,3 +110,193 @@
    chmod 1777 tecadmin.txt
 
    Same for user SUID group using SGID
+
+17.What is SSH Protocol?
+   SSH,or secureshell,is a secure protocol and the most common way to safely administering remote servers,
+   because it encrypt data while transferring from one host to another throughout the network.
+
+18.What is the default port for ssh and configuration path?
+   Default port no is 22
+   Configuration path is /etc/ssh/sshd_config
+
+19.How to change the default SSH port number?
+   we can chnage the default port no by editing the configuration file /etc/ssh/sshd_config 
+   and change the port number 22 to other port number, After changing restart the ssd service.
+   If firewalld and selinux enabled write the rule in firewall for new port number.
+
+20.How does port forwarding works in ssh?
+   Ckient is going to connect using different port number (in case 2048) other then drfault,
+   But server ssh service will respond on defult port, we have to use ssh -p 2048 from client machine.
+   ssh port forwarding using firewall port forwarding rule.
+   ssh server port forwarding using firewall redirection.
+
+21.What are the different data manipulation(Encryption) techniques supported by SSH?
+   SSH supports symmetric and Asymmetric encryption methods.
+
+22.How to disable root login for ssh server?
+   By editing ssh configuration file /etc/ssh/sshd_config enter
+   permitrootlogin no
+
+23.How to Enable only keybased authentication?
+   This feature provides more/high security 
+   we have to disable user login to ssh first  / diable passwordauthentication no
+   enable RSAAuthentication yes & Pubkeyauthentication yes  
+
+24.Is it possible to login to remote SSH server without password?
+   Yes we can do by setting up Key based authentication
+
+25.What is different between telnet and ssh?
+   Telnet
+   ------
+   Data goes on network as a plan text
+   default port 23, Bandwith usage is less
+   
+   SSH
+   ------
+   Data goes on network as encrypted format
+   default port 22, Bandwith usage is high
+
+26.How to Limit SSH access to specific subnet?
+   Edit sshd_config file and add subnet as mentioned 20 SSH
+   AddressFamily 192.168.0.4/24
+
+27.How to restrict SSH server to use only protocol version 2 0r 1?
+   Edit default configuration file and un-comment below shown line
+   #The default requires explicit activation of protocol 1
+    protocol 2
+
+28.What do you mean by SSH chiper? Tell me different types of ciphers?
+   Cipher is an algorithm to perform encryption and decryption.
+   Types of cipher supported by SSH are
+   1.3des 2.blowfish 3.des
+
+29.How do you access GUI using SSH connection?
+   SSH will also support of transferring X11 forwarding,
+   We have to use option calle -XY to open server GUI app from client.
+
+30.What the best procedure to troubleshoot SSH connection error?
+   To Enable Debugging in ssh command use -v option which gives more appropriate and deep analysis.
+
+31.How to check SSH version?
+   # ssh -V
+
+32.How to connect to remote IPv6 enabled server?
+   # ssh -6 username@<ip address>
+
+33.What is the procedure to log SSH error to separate file?
+   Using option -E log_file it will send an standard error to specified file
+
+34.How many types of Key types SSH supports?
+   1.RAS 2.DSA 3.ECDSA 4.ED25519
+
+35.Where SSH will store its trusted ssh client keys?
+   The keys are copied to ./ssh/known_hosts
+
+36.What is the role of authorized_keys file?
+   /home/usr/.ssh/authorized_keys file stores all client keys to provide password less authentication.
+
+37.SSh session idle timeout-auto logout?
+   ClientAliveInterval 15m
+   ClientAliveCountMax 5
+
+38.What command lists file permissions?
+   # ls -l
+
+39.What would you include on the command line to start a program running in the background?
+   &
+
+40.How to shutdown a linux system from the command line?
+   # poweroff
+
+41.One advantages of Hard links over Symbolic links is?
+   A Hard link allows you to change the permission on the underlying file.
+
+42.How to remove user from group?
+   # gpasswd -d username groupname
+
+43.Which Linux command is used to assign privileges to a particular file as a designated user?
+   # chown
+
+44.What is the default file system in linux?
+   Ext4
+
+45.How to scan for newly assigned LUNs?
+   # ls /sys/class/scsi_host/ | while read host ; do echo "_ _ _" > /sys/class/scsi_host/$host/scan ; done
+
+46.How many types of users exists in linux, by default?
+   3 types,root,local user and system users
+
+47.There are threeusers Ravi,Sekar,& Ram yu have to give access of FTP,Telnet,SSH to Ravi.
+   Only SSH to Sekar Only Telnet to Ram,How will you configure?
+   # visudo
+   Cmnd_Alias FTP = /bin/ftp
+   Cmnd_Alias SSH = /bin/ssh
+   Cmnd_Alias Telnet = /bin/telnet
+   ravi  ALL=(ALL)   NOPASSWD: FTP, TELNET, SSH
+   Sekar ALL=(ALL)   NOPASSWD:SSH
+   ram   ALL=(ALL)   NOPASSWD: TELNET
+
+48.What is firewall?
+   A firewall is a network security device/software that monitor incoming and outgoing network traffic.
+   Permits / blocks data packets based on a set of security rules.
+
+49.What is SELinux, SELinux context?
+   Security-Enhanced Linux is a security architecture for linux system.
+   that allows administrator to have more control over who can access the system
+
+   SELinux context that contains additional information such as an SELinux user,role,type,optionally level.
+
+50.If you have scheduled job should be run at 2PM but it has not been executed what will you do?
+   1.Check cron services is running
+   2.Check crontab entry has proper details
+   3.Check crontab entry do not empty line at the END
+   4.Check file/script have executable permission
+   5.Check cron logs /var/log/cron
+
+51.How will you install Packages?
+   # yum install <Pkg>
+   # rpm -ivh <rpm-name>
+   # apt-get install <pkg>
+
+52.Which files have SUID by default,what is SUID?
+   SUID is a special type of file permission give to a file.
+   It gives a temporary permission to a user to run a program/file with the permission of the owner
+   rather then that the user who runs it.
+   SUID default file is /etc/passwd
+
+53.Tell me about log management?
+   Managing log files effectively to reduce log file stroage usage.
+
+54.If a server is not able to SSH to a client, how will you troubleshoot?
+   1.Ping server from client to verify reachability
+   2.Check SSH service is running
+   3.Check firewall rules (Allow SSH port 22)
+   4.ss-tlnaup or netstat -alntup to verify port 22 is listening / not
+
+55.Process states in Linux?
+   D-Uninterruptible sleep
+   I-Idle kernel thread
+   R-Running or runnable
+   S-Interruptible slepp / waiting the event to complete
+   T-Stopped by job control signal
+   t-Stopped by debugger during the tracing
+   W-paging 
+   X-dead
+   z-Zombie,terminated but not reaped by its parent
+
+56.Tell me about top & ps commands?
+   ps  - report a snapshot of current processes.
+   top - display linux processes
+
+57.How will you check the dependencies of the packages?
+   # yum deplist <pkg>
+
+58.What is DNS?
+   DNS - Domain naming system used to convert ip address to name and vice versa
+
+59.What is DHCP?
+   DHCP - Dynamic host control protocol it assgin the ip address to the systems.
+
+60.Difference between YUM and RPM?
+   YUM - install packages with all dependencies
+   RPM - only install pacakge

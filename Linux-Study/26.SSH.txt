@@ -63,3 +63,10 @@ Prohibit the root user from logging in using SSH
 Prohibit password authentication using SSH
 --------------------------------------------
 Enable PasswordAuthentication yes
+
+1. connect to remote IPv6 enabled server?
+   # ssh -6 username@<ip address>
+
+2. Limit SSH access to specific subnet?
+   Edit sshd_config file and add subnet as mentioned 20 SSH
+   AddressFamily 192.168.0.4/24

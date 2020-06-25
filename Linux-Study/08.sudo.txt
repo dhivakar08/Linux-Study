@@ -11,7 +11,7 @@
  Best Practice:
  --------------
  1.Always edit with visudo
- 2.One file for wholeenterprise
+ 2.One file for whole enterprise
  3.Use host_alias to group servers
  4.Use user_alias to group users 
  5.Use %groupname when you can use OS user groups 
