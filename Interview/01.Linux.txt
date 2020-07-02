@@ -300,3 +300,9 @@
 60.Difference between YUM and RPM?
    YUM - install packages with all dependencies
    RPM - only install pacakge
+
+61.Where nework configuration files are stored?
+   /etc/sysconfig/network-scripts
+
+62.Which command used to check the DNS configured correctly?
+   # nslookup

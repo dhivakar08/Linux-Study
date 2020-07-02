@@ -1,0 +1,35 @@
+Linux Directory Structure
+--------------------------
+/bin       --- All the executable files for the users ex : normal user execute the command like cat pwd isstored in /bin dir
+
+boot       --- It contain boot information and configuration files
+
+dev        --- Is the directory is store a special files like device files like cd,dvd,tape drives
+
+/etc       --- Contain all the configuration files like ssh configuration files
+
+/home      --- User to store the users own files 
+
+lib/lib 64 --- It contain system executable files and libray files
+
+/mnt       --- Optinal dir mount something
+
+/opt       --- It contain third party software files are stored
+
+/proc      --- System related information like how much cpu,memory information
+
+/root      --- It used for root user home directory
+
+/run       --- Attach any devices auto mount option 
+
+/sbin      --- Is a executable files mount fdisk related to super user commands are stord in /sbin
+
+/sys       --- System related configuration files like device scanning
+  
+/tmp       --- Temprovary files are stored full permission to all users we can assign some special 
+
+/usr       --- When ever you install local software it store that software configuration files
+
+/var       --- Is a variable data like logs
+
+

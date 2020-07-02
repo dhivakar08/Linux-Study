@@ -1,0 +1,8 @@
+Features of Linux
+------------------
+1.Portable           --- Software can works on different types of hardware 
+2.Open Source        --- Source code is freely available 
+3.Multi-user         --- Muliple user connect the system at the time
+4.Multiprogramming   --- Multiple application can run at same time
+5.Shell              --- Linux provides a special intrtpreter program which can be used to execute commands of the os
+6.Security           --- Linux provides user security using authentication features like password protection / controlled access to specific files
