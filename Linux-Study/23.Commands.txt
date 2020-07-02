@@ -37,3 +37,41 @@ File system commands
 
 12.Check the kernel version
    # uname -r
+
+13.Check current system date and you can customize.
+   # date
+   # date +%d:%m:%y   ---- date:month:year
+
+14.Check calender
+   # cal
+   # cal -y 2018     # cal -y 2021
+   # print no of the days # cal -j <year>
+   # print particular month of the year # cal 3 <year>
+
+15.Creating a multiple file
+   # touch file{1...5}
+
+   Copy commands
+   -------------
+
+16.Copy commands
+   # cp <source file>  <destination location>
+   Normally copy the file from one location to another location the date will vary if you want the same date and information means
+   # cp -p <source file>  <destination file>
+
+17.Creating a link between the file
+   # cp -s <source file>  <destination file>
+   # cat <file name> 
+   It create the symbolic link between (sortcut) file 
+
+18.Update the file 
+   If you already copy the file after that you update the file means you don't need to copy the file again you can update the data.
+   # cp -u <source file> <destination><file name>
+
+19.Deleting the files and directory
+   # rm <file name>   -f forcefully delete with out conformation
+   # rmdir <directory name>   
+   Becarefull to use rm command in production environment if you deleted you cannot roll back again
+
+19.Copy the directory
+   # cp -R <source directory>  <destination directory>
