@@ -16,4 +16,7 @@ which <command name>
 
 3. The package is installed or not checking 
  
-   rpmquery  <package name>     
+   rpmquery  <package name> 
+
+4.uninstall the package 
+  # rpm -e <package name>

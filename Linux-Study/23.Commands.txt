@@ -75,3 +75,46 @@ File system commands
 
 19.Copy the directory
    # cp -R <source directory>  <destination directory>
+
+ Diff command
+ -------------
+ The diff command used to analys the file difference between the two files
+
+20.Checking the file difference
+    # diff <file 1> <file 2>
+
+21.Detail information about the files
+   # diff -c <file 1> <file 2>
+
+23.Checking difference between parallel information
+   # diff -y <file 1> <file 2>
+
+ More command
+ -------------
+ It used to view the large information to the screen 
+
+24.# cat <file name> | more      ---- ex : /var/log/messages file
+   Enter "space bar" to view the messages   for quit using "q"
+
+ Sort command
+ -------------
+ It used to sorting the files
+
+25.# sort -nk<number of the column>  filename       --- here n - number k - key 
+
+26.# sort in reverse way 
+   # sort -rk<number of the column> <file name>
+
+   Ex : df -h | sort -nk4
+
+27.Head command used to view the first lines
+   # head -n<specify the number>  <file name>
+
+28.Tail command used to view the last lines of the file
+   # tail -n<specify the number>  <file name>
+
+29.Tail -f command used to view the live update
+   # tail -f <file name>           --- open two terminal and check the live update
+
+   Ex : tail -f /var/log/messages   open another terminal # systemctl restart network.services you will monitor the sessions.
+   
