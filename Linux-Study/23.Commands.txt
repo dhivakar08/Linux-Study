@@ -118,3 +118,64 @@ File system commands
 
    Ex : tail -f /var/log/messages   open another terminal # systemctl restart network.services you will monitor the sessions.
    
+ TR command
+ -----------
+ tr command used to convert lower case to upper case and upper case to lower case
+30.# tr a-z A-Z 
+   <enter the content>
+
+31.# tr a-z A-Z < <file name>       ---- give a input via file
+
+32.Deleting particular word
+   # cat <file name> | tr -d <enter the word first letter>
+
+33.Deleting the numbers
+   # echo "1234 are the numbers" | tr -d [:digit:] 
+
+34.Provide the tab space between the word
+   # echo "this is the line" | tr [:space:] '\t'
+
+ WC command
+ -----------
+ It used to count the word chracters of the file
+
+35.# wc <file name>      ---- no of line,word,chracter and filename
+   # wc -l <file name>   ---- line
+   # wc -c <file name>   ---- chracter
+   # wc -w <file name>   ---- word
+
+   Disk Utility Commands
+   ------------------------
+1. Memory commands
+-------------------
+   1.Checking memory and swap memory utilization 
+     # free      ---- the out put is not human readable format 
+     # free -m   ---- size in MB
+     # free -g   ---- size in GB
+     # free -s <sec : like 2>   ---- every 2 sec it provide free memory utlization list
+     # free -c <sec : like 4>   ---- only 4 times will list
+
+2.DF command 
+------------------
+   1.Disk partition utilization check
+     # df       ---- the out put is not human readable format
+     # df -h    ---- It will provide human readable format
+     # df -Th   ---- information of file system types will listout
+     # df -i    ---- Inode information will listout
+     # df -t <mention file system type like : xfs>      ---- it show only xfs file system information
+     # df -t tmpfs     ---- it show only temp file system information
+     
+3.DU command
+---------------
+   1.Disk utilization (space) check
+     # du -sh .      ---- it show the current directory size      --- here s - summarize h - human readable
+     # du -sh <specify directory>
+     # du -a         ---- it show all the file size in the current directory
+     # du -ah        ---- it show all the file size in the current directory in human readable format
+     # du -cbah --time   ---- it show all the file size and created time data information
+
+36.# fdisk -v    ----- it show the disk utility version
+
+37.# parted /dev/sda unit GB print free   ---- it show unallocated size in the hardisk
+
+38.# whereis <command name>    ---- it show the command executable path
