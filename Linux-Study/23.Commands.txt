@@ -179,3 +179,81 @@ File system commands
 37.# parted /dev/sda unit GB print free   ---- it show unallocated size in the hardisk
 
 38.# whereis <command name>    ---- it show the command executable path
+
+39.Checking which user currently logged in
+   # whoami
+
+40.Checking more details about currently loggen in user
+   # w       ---- it provide details about system up time,terminal information,user loggend in , CPU load average
+
+41.Detailed information about users and group 
+   # id
+
+ WHO command
+ ------------
+42.Who also provide the user information
+   # who
+   # who -r     ---- it provide the details about the run levels.
+   # who -q     ---- system currently logged in user count
+   # who -b     ---- system boot time information
+
+43.System rebooted information
+   # last
+
+44.Uname command used to find the linux distribution i nformation
+   # uname -a
+   # uname -r     ---- Information about kernel
+   # uname -s     ---- Information about the distribution
+   # uname -i     ---- Information about the hardware
+
+ Hostname command
+ -----------------
+45.It used to display the hostname information
+   # hostname
+   # hostname -f    ---- Full information about the hostname
+   # hostname -i    ---- IP address of the host
+
+46.Set New Hostname
+   # hostnamectl set-hostname <Enter new hostname>
+   # hostnamectl restart
+
+ Find and locate command
+ ------------------------
+1.locate command
+------------------
+ It used to find file / directory location information in the system
+ # locate <file / directory>
+
+ If you are create new file / directory before locate please run 
+ # updatedb   ---- it update locate database after locate
+ # locate <file / directory>
+ # locate .<file / directory>    ---- locate hidden files
+ # locate <specify directory> *.txt  ---- extension based locate
+
+ Note : when using locate every time need to run # updatedb then only it will provide latest result.
+
+2.Find command
+----------------
+ Find command used to findout any type of file / directory in more filter options
+ # find <location like : /root>  <file / directory name>
+ # find /root -name dhiva   ---- it find file name dhiva in root directory
+ # find / -name dhiva
+ # find . -name <file / directory name>  ---- it search the file / directory in current directory
+
+ Find specific file / directory 
+ # find /root -type f -name <file name>    ---- f means file and d means directory
+ # find /root -iname <file / directory name>  ---- it is a case sensitive search
+ # find /root -not -name <file / directory name>  ---- exception based search
+ # find /root -name ".*"  ---- hidden file search
+ # find /root -type f -perm 777   ---- permission based search
+ # find /root /var /etc -name f <file name>  ---- it search multiple directory
+ # find /root -mtime <enter no of days like : 10>    ---- it search based on modified time
+ # find /root -atime <enter no of days like : 10>    ---- it search based on accesed time
+ # find /root -mtime +10 -mtime -20   ---- it search based on between time like 10 to 20 is the time range
+ # find /root -cmin -60    ---- search modified file in last 60 min
+ # find /root -size 10M    ---- search based on file size
+ # find /root -group root  ---- search based on the group root
+
+ Find and delete the files
+ ---------------------------
+ # find /root -type f -name "*.txt" -exec rm -f {} \;

@@ -67,3 +67,53 @@ Type of Process
  4. Putting jobs to the backgroud using &
 
  5. Finding the backgroud jobs using #jobs command
+
+  TOP command
+  ------------
+  The  top program provides a dynamic real-time view of a running system.  
+  It can display system summary information as well as a list of processes or threads currently being managed by the Linux kernel.  
+  The types of system summary information shown and the types, order and size of information displayed for processes are all user configurable and that configuration can be made persistent across restarts.
+
+   Zombie process
+   ---------------
+   The zombie process means the process is already die but did not excit from the process list.
+
+    Priority value - 0 to 40 if priority vale is 40 means low priority 0 means high priority
+    Nice value  - is opposit to the priority value from -19 is high value 20 is the low vale
+
+    Process state
+    D - Uninteruptable sleep -- the sleep goes long time
+    R - Running state
+    S - Sleeping
+    T - Stoped by job control signal like kill signal
+    t - Stopped by the debugger by the trace
+    Z - Zombie process
+
+   Press c it will show the complete path of your command again press c goes normal 
+   
+   If you want to kill any process press k and provide your PID enter provide the kill signal and enter
+
+   Press z it will display the colored text
+
+   Modify the nice value press r enter the PID and provide the nice value, if you provide - nice value means you priority value will increase
+   Ex : what ever command you run it will execute with high level priority
+
+   Press 1 to provide CPU information come back again press 1
+
+   Increase the refersh rate : 
+   Defaulty it refresh every 3 sec if you want to change means press d and press 1 the frequent rate will change
+
+   For help perss h for press esc / q means quit
+
+   Spilt the screen means press shift+a  come back also press shift + a
+
+   # top -n <enter number of times : like 3>    ---- after 3 times the screen will quit
+
+   # sleep 300 & ---- put some process in sleep
+   # ps -ef | grep sleep
+   # top -p <enter the PID>
+   # top -u <user name>   ---- search by users  
+   # top -d1 -b > topout  ---- it send the top d - delay 1 sec to store topout files
+   # top -H -p <PID>  > topout ---- store particular process
+
+   
