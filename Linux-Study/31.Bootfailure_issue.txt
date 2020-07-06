@@ -1,0 +1,37 @@
+How to recover grub.conf in Linux | RHEL 8, 7 | 
+------------------------------------------------
+  1.# rm -rf /boot/grub2/grub.cfg
+   If you are delete / crash the grub file after reboot system will land in a grub console
+  2.# exit ----- exit from the grub console
+   Put the iso file and reboot the system
+  3.Select rescue / troubleshooting mode
+  4.In the rescue mode select option "1"
+  5.press enter
+  6.chroot /mnt/sysimage     ---- it change the rootshell
+  7.grub2-install /dev/sda   ---- if you have anyother device point that one
+  8.grub2-mkconfig -o /boot/grub2/grub.cfg
+  9.exit
+ 10.exit
+ 11. It automatically reboot the system and you will get the console
+
+  Method -2:
+  ----------
+  If you have a backup of /boot you can restore as well its work
+
+ ------------------------------------------------------------------------------------
+
+ Failed to Start Switch Root Linux Troubleshooting | Emergency Mode
+ --------------------------------------------------------------------
+
+ If the system in Emergency mode means
+ 1. #mount 
+ 2. # mount -o remount_rw /sysroot
+ 3. # mount    ---- this time is verify is read write file system is enabled
+ 4. cd /sysroot
+ 5. ls
+ 6. cd etc
+ 7. os release-orig os-release
+ 8. exit
+ 9. exit 
+   
+
