@@ -258,4 +258,27 @@ File system commands
  ---------------------------
  # find /root -type f -name "*.txt" -exec rm -f {} \;
 
+ CUT Command
+ -------------
+ It used to cut the file text 
+ It Remove the section from each line of the file
  
+  1.# ehco "raja" | cut -b 2   --- the result is "a"  b means bytes
+  2.Cut a range of bytes
+    # ehco "kumar" | cut -b 1-4
+  3.Cut the character from the file
+    # cat <filename> | cut -c 1,4,10
+  4.Cut the ranges of character from character
+    # cut <filename> | cut -c 10-15
+  5.Cut the line from particular point to last
+    # cat <filename> | cut -c5-
+  6.Cut the delimeter file
+    # cut -d ':'-f1 /etc/passwd    ---- -f file
+
+ Paste command
+ --------------
+ The paste command used to merge / combine the two files
+ 1.# paste <file1> <file2>
+ 2.# paste -s <file1> <file2>  ---- join the line in rows
+ 3.# paste -d '\n' <file1> <file2> ----- suffle the two different files 
+
