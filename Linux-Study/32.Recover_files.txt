@@ -1,0 +1,20 @@
+How to Recover accidentally deleted files Linux 
+------------------------------------------------
+Test disk utility
+-----------------
+TestDisk is powerful free data recovery software, It was primarily designed to help recover lost partitions and/or make non-booting disks bootable again when these symptoms are caused by faulty software or human errors.
+Like accidentally deleted files and partitions.
+
+Advantages
+-----------
+1.Recover deleted partitions
+2.Recover FAT32/NTFS/EXT2/EXT3 and EXT4 file system type data 
+3.Rebuild bood sector of FAT32 and NTFS from backup
+4.Locate ext2/ext3/ext4 backup superblock
+5.Supported OS Windows/Linux/FreBSD/NetBSD/OpenBSD/Sunos and Macosx
+
+Disadvantages
+--------------
+1.It will not recovery data from XFS file system
+2.RHEL 8 / Centos 8 does not have testdisk package
+3.Ext3 / Ext4 and XFS boot sector can't be restored using testdisk

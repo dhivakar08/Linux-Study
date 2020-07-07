@@ -1,0 +1,35 @@
+Backup and Restore Your Linux System with rsync
+------------------------------------------------
+Rsync - Remote sync it used to synchronize the content (files/ folders) between various computers across the network.
+        It works on the full and incremental data copy so it saves lot of time
+
+ 1.Simply copy the data using rsync
+   # rsync -av <source of the file>  <destination path>
+
+ 2.If you are take a backup after that you delete some files that you need to update in your backup means use --delete option
+   #  rsync -av --delete <source of the file>  <destination path>
+
+# sudo rsync -aAXv --delete --exclude=/dev/* --exclude=/proc/* --exclude=/sys/* --exclude=/tmp/* --exclude=/run/* --exclude=/mnt/* --exclude=/media/*
+ --exclude="swapfile" --exclude="lost+found" --exclude=".cache" --exclude="Downloads" --exclude=".VirtualBoxVMs" --exclude=".ecryptfs" /source /destination
+
+ -a = archive   archive mode (preserve user and group permission)
+ -A = Acls      preserve acls
+ -X = xattrs    preserve extended attributes (like properties of files name, value)
+ -v = verbose   increase verbosity
+
+ Note : --delete means (doing incremental backup) Ex: the files are already backedup means only modified contenet only tale backup.
+
+ --exclude / include the permission
+
+ Before run the backup command unmount the usb disk and format us .ext4 filesystem
+
+ You can also add the option --dry-run to simulate the backup process.
+
+ The command to restore your system is shorter:
+ -----------------------------------------------
+
+ sudo rsync -aAXv --delete --exclude="lost+found" /<backup path> /<system destination path>
+
+ To see more options run:
+
+ rsync --help
