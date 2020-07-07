@@ -1,20 +1,31 @@
-How to Recover accidentally deleted files Linux 
-------------------------------------------------
-Test disk utility
------------------
-TestDisk is powerful free data recovery software, It was primarily designed to help recover lost partitions and/or make non-booting disks bootable again when these symptoms are caused by faulty software or human errors.
-Like accidentally deleted files and partitions.
+Linux boot level troubleshooting steps
+---------------------------------------
+1.Intiramfs
 
-Advantages
------------
-1.Recover deleted partitions
-2.Recover FAT32/NTFS/EXT2/EXT3 and EXT4 file system type data 
-3.Rebuild bood sector of FAT32 and NTFS from backup
-4.Locate ext2/ext3/ext4 backup superblock
-5.Supported OS Windows/Linux/FreBSD/NetBSD/OpenBSD/Sunos and Macosx
+  Location : /boot
+  
+  The difference between initrd and initramfs
 
-Disadvantages
---------------
-1.It will not recovery data from XFS file system
-2.RHEL 8 / Centos 8 does not have testdisk package
-3.Ext3 / Ext4 and XFS boot sector can't be restored using testdisk
+   Initrd is basically set of blocks that gets copied to allocated chunks of memory then treated as a block device normall file system
+   created on the ram disk the initrd is a inital ram disk that mounted during boot up
+   Initrd used in rhel 5
+
+   Initramfs --- rhel 6 is a CPIO archive of files that allocated during bootup the kernal load the files in to the virtual file system
+   is called rootfs
+
+   Ex : remove initramfs file in /boot and restart the system
+ 
+   In linux boot process bios go the bootable device like HDD and it hist to first sector of the bootable device MBR 512 bytes
+   MBR look the boot loader and the patition table here primary bootlaoder pass the signal to secondary boot loader that contain in /boot
+   so that reason it will not boot
+
+   troubleshooting steps
+   -----------------------
+   1.Insert the iso file
+   2.Reboot and select the system to rescue mode 
+   3.Press 1 to continue
+   4.Enter
+   5.# chroot /mnt/sysimage
+   6.cd /boot
+   7.dracut -f initramfs-$(uname -r) initramfs-$(uname -r)   (or) # uname -r instead of -$(uname -r) enter the kernel version
+     Here dracut is a tool for restore initramfs file it contain rhel versions defaulty
