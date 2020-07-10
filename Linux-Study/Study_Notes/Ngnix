@@ -1,0 +1,104 @@
+About Nginx
+------------
+Nginx was cerated in 2004 by russian developper Igor sysoev
+He consider to design a server to 10000 request and High performance High Concurrency and Low Resource usage
+Nginx is not only a webserver it is a reverse proxy server also
+
+Nginx Vs Apache 
+---------------
+Apache is configured in prefork mode 
+The prefork mode is a set number of processor is accept single request at the time
+
+A single nginx process accept multiple request concurrently
+Nginx using low resource usages
+
+The nginx is faster then apache because of nginx having faster static resource and higher Concurrency
+Nginx is receive 1000 of process in single processing thread and respond to them faster
+
+Installing Nginx
+-----------------
+The centos / redhat not having nginx package so using epel repository
+# yum insatll epel-release
+# yum install nginx
+Yum does not start the service automatically 
+# service nginx start
+Checking is process is working
+# ps aux | grep nginx          ----- this output you will get master and worker process
+# copt the server ip address and paste to browser like http://<server ip>
+
+The nginx configuration file location is /etc/nginx
+
+Nginx custom build
+-------------------
+# yum check-update
+Go to nginx.org and click download link click mainline version right click and copy the link
+using wet / curl -o to download
+# tar -zxvf <download file name>
+go to the extracted nginx directory 
+now configure the source code 
+# ./configure    ---- c compiler not found
+# yum groupinstall "development tools"
+# ./configure    ---- to compile the source code if PCRE error means run below pkg
+# yum install pcre pcre-devel zlib zlib-devel openssl openssl-devel
+# ./configure    ---- compile again
+# make
+# make install
+# cd /etc/nginx  ---- verify nginx installation
+
+Checking nginx version 
+# ngnix -v
+
+For help
+# nginx -h 
+
+Stop the nginx 
+# nginx -s stop    ---- -s is the signal
+
+Adding nginx service to systemd
+--------------------------------
+# touch /lib/systemd/system/nginx.service
+
+https://www.nginx.com/resources/wiki/start/topics/examples/systemd/
+
+# vim /lib/systemd/system/nginx.service and copy past the above link script
+
+In the file modify the below entrys
+
+PIDFile=/var/run/nginx.pid
+ExecStartPre=/usr/bin/nginx -t 
+ExecStart=/usr/bin/nginx 
+;wq 
+
+# systemctl start nginx
+# ps aux | grep nginx
+
+Creating a virual host
+-----------------------
+create one director like
+# /sites/demo   ---- copy some sample web pages in that directory
+taking the backup of the nginx.conf file
+vim /etc/nginx/nginx.conf  ---- delete all 
+type below mentioned syntax
+
+events {}
+http {
+    include mime.types;
+    server {
+    listen 80;
+    server_name 192.168.0.1      ----- <enter the ip address>
+    root /sites/demo;            ----- <enter the path like /sites/demo; >
+    }
+}
+;wq 
+
+Note : each virtual context having new server context / server block
+
+Check the nginx configuration 
+# ngnix -t     ----- syntax is ok
+
+Reload and Restart
+-------------------
+Reload - no downtime is required to update the configuration file
+Restart - downtime is required
+
+# service nginx reload
