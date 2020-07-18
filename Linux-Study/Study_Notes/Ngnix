@@ -102,3 +102,167 @@ Reload - no downtime is required to update the configuration file
 Restart - downtime is required
 
 # service nginx reload
+
+Location Blocks
+------------------
+
+Syntax 
+ 
+  server {
+      Location Url {
+
+      }
+  }
+
+ 1.Exact Match   =
+ 2.Preferential Prefix match ^~
+ 3.Regular Expression ~*
+ 4.Prefix Match
+
+  Prefix match
+  -------------
+  The prefix match is what ever word start from /greet (or) /greetings (or) /greet/more it will display
+  # location /greet {
+      return 200 "Hello form Nginx "/greet" location.";
+  }
+
+  Exact match
+  ------------
+  The exact match is only show the word /greet
+  location = /greet {
+      return 200 "Hello form Nginx "/greet" location.";
+  }
+
+  Regular Expression match --- it is a case sensitive
+  --------------------------
+  The exact match is only show the word /greet after need some number like : /greet2
+  location ~ /greet [0-9] {
+      return 200 "Hello form Nginx "/greet" location.";
+  }
+  
+  Regular Expression match --- it is a incase sensitive
+  --------------------------
+  The exact match is only show the word /greet after need some number like : /greet2
+  location ~* /greet [0-9] {
+      return 200 "Hello form Nginx "/greet" location.";
+  }
+
+  Preferential prefix
+  ---------------------
+  The exact match is only show the word /greet
+  location ^~ /greet {
+      return 200 "Hello form Nginx "/greet" location.";
+  }
+
+
+  examples
+  --------
+
+  [ root@ip-172-31-16-235 /etc/nginx ]# cat nginx.conf
+events {}
+http {
+    include mime.types;
+    server {
+     listen 80;
+     server_name 3.128.190.12;
+
+     root /etc/nginx/simple;
+     location ~ /greet[0-9] {
+     return 200 'Hello from ngnix "/greet" location.';
+
+}
+    }
+}
+
+  Variables
+  ----------
+ location /inspect {
+     return 200 "$host\n$uri\n$args"            ---- it will display the host ip address
+ } 
+
+ We can pass the querry 
+ Like : http://3.128.190.12/inspect?name=ray
+ 
+  output : 3.128.190.12
+           /inspect
+           name=ray 
+
+ Ex 2 : location /inspect {
+        return 200 "Name: $arg_name";
+ }
+
+ Check static API Key
+ --------------------
+  if ( $arg_apikey != 1234 ) {
+      return 401 "Incorrect API Key";
+  }
+   
+ Browser : <ip address of the server>/?apikey=1234 
+
+ For more information refer the nginx document 
+
+ Rewrites
+ ---------
+ We create simple redirect to using simple return direct
+ 
+ I download image.jpg to the simple directory     
+
+ Here 307 ---- is the redirect code
+
+ Example :
+ [ root@ip-172-31-16-235 /etc/nginx/simple ]# ll
+total 28
+-rw-r--r-- 1 root root  689 Jul 11 01:27 CODE_OF_CONDUCT.md
+drwxr-xr-x 2 root root   30 Jul 11 01:27 images
+-rw-r--r-- 1 root root 6064 Jul 11 03:42 imag.jpg
+-rw-r--r-- 1 root root 1082 Jul 11 01:27 index.html
+-rw-r--r-- 1 root root 6555 Jul 11 01:27 LICENSE
+-rw-r--r-- 1 root root  469 Jul 11 01:27 README.md
+drwxr-xr-x 2 root root   23 Jul 11 01:27 styles
+
+[ root@ip-172-31-16-235 /etc/nginx ]# cat nginx.conf
+events {}
+http {
+    include mime.types;
+    server {
+     listen 80;
+     server_name 3.128.190.12;
+
+     root /etc/nginx/simple;
+     location /inspect {
+     return 307 /imag.jpg;
+
+}
+    }
+}
+
+Browser : If you are type http://<ip address>/inspect ----- it redirect to http://<ip address>/imag.jpg
+
+Try files and Named locations
+------------------------------
+The try files are first check the file in your web directory if not there it go and check another location you are provided
+
+Syntax 
+  
+  server {
+      try_files path1 path2 final;
+      location /{
+          try_files path1 path2 final;
+      }
+  }
+
+  The name location is assigning the name to the your file location
+
+  Logs
+  -----
+  The nginx have two types of Logs
+  1.Error Logs
+  2.Access Logs
+
+  If you want to create any log file seprately means
+
+  root /sites/demo;
+  location /secure {
+      access_log /var/log/nginx/secure.access.log
+      return 200 "welcome to nginx";
+  }

@@ -70,3 +70,14 @@ Enable PasswordAuthentication yes
 2. Limit SSH access to specific subnet?
    Edit sshd_config file and add subnet as mentioned 20 SSH
    AddressFamily 192.168.0.4/24
+
+Allow and deny ssh access for particular user / Groups 
+--------------------------------------------------------
+1. Add the below line to allow the users
+   AllowUsers  <username 1> <username 2>
+
+2. Allow to particular group
+   AllowGroups <Group name>
+
+3. Deny any user or group uisng below mentioned command
+   DenyUsers  <username>
