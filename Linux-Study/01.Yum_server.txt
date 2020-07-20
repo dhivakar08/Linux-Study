@@ -29,7 +29,7 @@ vim server.repo
 
 [server]                        |  Lable of the repository
 name=Repository server
-baseurl=file://var/ftp/pub
+baseurl=file:///var/ftp/pub
 enabled=1                       |  This key defines the state of repository. If value is set to 1 then repository is enabled.
                                    If value is set to 0 then repository is disabled.
 gpgcheck=0                      |  This key defines whether the integrity of package should be check or not. If value is set to 1, integrity will be checked.

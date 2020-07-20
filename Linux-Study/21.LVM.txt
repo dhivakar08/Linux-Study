@@ -109,8 +109,8 @@ If you have a exsisting VM in server 1 like /dev/vg1/lvtest  mounted on /test
 
 13.Create one directory and mount the lvm
 
-Mirror Method
--------------- 
+Mirror Method [Migrate lvm from one volume to another volume without data loss]
+-------------------------------------------------------------------------------
 1.Create newly one disk and add to the server
 
 2.using lsblk / fdisk -l command to verify the newly added disk 
@@ -121,7 +121,7 @@ Mirror Method
   and also confirm which physical volume used to hold this volume group and logical volume.
   # vgs -o+devices | grep <vg name> 
 
-5.Create new physical volume using 
+5.Create new physical volume using newly added disk
   # pvcreate command and verify using # pvs
 
 6.Next, add the newly created physical volume to existing volume group tecmint_vg using ‘vgextend command’
@@ -145,9 +145,9 @@ Mirror Method
 11.Once migration process completed, verify the converted mirror
    # lvs -o+devices
 
-12.Once you sure that the converted mirror is perfect, you can remove the old virtual disk vdb1. 
+12.Once you sure that the converted mirror is perfect, you can remove the old virtual disk from existing volumes using 0 
    The option -m will remove the mirror, earlier we’ve used 1 for adding the mirror.
-   # lvconvert -m 1 <lvm path> <old disk/volume path>
+   # lvconvert -m 0 <lvm path> <old disk/volume path> like [/dev/sda{5,6}]
 
 13.Once old virtual disk is removed, you can re-check the devices for logical volumes using following command.
    # lvs -o+devices
@@ -184,8 +184,10 @@ Mirror Method
  4. #vgcfgrestore -l <vg name>
  
  5. # vgcfgrestore -f <restore path like : /etc/lvm/archive/test_00009-41396741.vg >  <vg name>
+
+    If you run the above command the lvm also restored you can use lvs to verify 
  
- 6. # lvchange -ay <lvm path>
+ 6. # lvchange -ay <lvm path>       ---- include flags and parameter change 
  
  7. # lvs to verify and mount
 
