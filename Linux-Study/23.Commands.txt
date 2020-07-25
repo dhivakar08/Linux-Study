@@ -282,3 +282,20 @@ File system commands
  2.# paste -s <file1> <file2>  ---- join the line in rows
  3.# paste -d '\n' <file1> <file2> ----- suffle the two different files 
 
+ To find all the hardware connected to the server
+ -------------------------------------------------
+  # lspci     ------ it list out all the hardware components connected to the server
+  # lspci | grep -i usb
+
+  The path to check the HBA and all the hardware related things
+  # cd /sys/class    ----- if hba  cd /sys/class/fc_host
+
+  To find the HBA more detail with the wwn number and dev path
+  # systool -c fc_transport -v      ----- the portname is the wwn number (world wide name) 
+
+  Checking which HBA is online and offline
+  # systool -c fc_host -A "port_state"
+
+  Find the particular file size in the linux like here size is 1371
+  ------------------------------------------------------------------
+   ls -l | awk '{if ($5 == 1371) print $9}'

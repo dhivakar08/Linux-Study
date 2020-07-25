@@ -1,0 +1,19 @@
+Run Levels
+-----------
+The run level in linux are nothing but how to the system will boot in what mode
+
+We can see the run-level in following path : /etc/initab
+
+Default runlevel
+------------------
+0 - Halt / shutdown (Do not set initdefault to this)
+1 - Single user mode (root user can loggin there is no graphical interface)
+2 - Multiuser without NFS 
+3 - Full multiuser mode with NFS  (no graphical)
+4 - unused
+5 - X11 (Graphical interface)
+6 - reboot 
+
+
+
+
