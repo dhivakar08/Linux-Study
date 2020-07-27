@@ -42,7 +42,7 @@ Type of users in linux
   # useradd -u 2000 -g test1 -G dhivakar,raja -c "user for RHCSA" -s /bin/bash -e 2020-07-10 -d /etc/test -p pass@123 rhsca --- rhsca is username 
 
  5. Changing Username 
-   # usermod -l <new name> <old name>
+   # usermod -l <new name> <old name>                 ----- l means login name
 
  6. Add the user to the secondary group
     # usermod -aG  <group names> <username>           ------ a means appending
@@ -64,7 +64,7 @@ Type of users in linux
     # usermod -f  <username>
 
  12.Set the passwd expierey date
-    # usermod -e <mention expierey date>  <username> 
+    # usermod -E <mention expierey date>  <username> 
 
  13.Get the  passwd information for particular user
     # chage -l <username>
@@ -77,6 +77,9 @@ Type of users in linux
 
  16.How to Lock User Accounts After Failed Login Attempts
     Make a entry with # vi /etc/pam.d/system-auth & # vi /etc/pam.d/password-auth files
+  
+ 17.Change the UID of the user
+    # usermod -u  <Enter new UID> <username>
                       
  Note : After passwd expierey system will allow the user to change the passwd, 
         if you wnat to deny the passwd change option modify the /usr/bin/passwd file permission.
@@ -100,8 +103,10 @@ Type of users in linux
  5.Remove the user from the group
    # gpasswd -d <username> <groupname>
 
- 6.Change the id of the group
+ 6.Change the gid of the group
    # groupmod -g <gid> <groupname>
 
  7.Change the groupname
    # groupmod -n <new groupname>  <old groupname>
+  
+ 

@@ -133,7 +133,7 @@ File / Directory Permissions
  3.Give ACL permission to the group
    # setfacl -m g:<groupname>:<permission like rwx>  <file / directory name>
  
- 4.Rmove ACL permission to the user
+ 4.Remove ACL permission to the user
    # setfacl -m u:<username>:---  <file / directory name>     ----- here --- remove all the permission
 
  5.How to copy / repilicate the permission from one directory to another directory

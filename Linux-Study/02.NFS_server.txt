@@ -13,7 +13,7 @@ Benefits of NFS
 ---------------------
 
 1.NFS allows local access to remote files.
-2.It uses standard client/server architecture for file sharing between all *nix based machines.
+2.It uses standard client/server architecture for file sharing between all linux based machines.
 3.With NFS it is not necessary that both machines run on the same OS.
 4.With the help of NFS we can configure centralized storage solutions.
 5.Users get their data irrespective of physical location.
@@ -52,7 +52,7 @@ client configuration
 
 1. To verify share is working 
 
-# showmount -e <enter the ip address>
+# showmount -e <enter the ip address>        ---- here e means export
 
 2. Mounting file create one mount directory
 
@@ -94,7 +94,7 @@ NFS Permissions :
 
 Important commands for NFS
 ---------------------------
-1.showmount -e : Shows the available shares on your local machine
+1.showmount -e : Shows the available shares on your local machine                        
 2.showmount -e <server-ip or hostname>: Lists the available shares at the remote server
 3.showmount -d : Lists all the sub directories
 4.exportfs -v : Displays a list of shares files and options on a server

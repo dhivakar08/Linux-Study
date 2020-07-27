@@ -12,7 +12,7 @@ dpkg -S $(which free)
 
 2. How to find the command excutable path
 
-which <command name>
+ which <command name>
 
 3. The package is installed or not checking 
  
@@ -20,3 +20,6 @@ which <command name>
 
 4.uninstall the package 
   # rpm -e <package name>
+
+5.Installing the package using rpm 
+  # rpm -ivh <package name>
