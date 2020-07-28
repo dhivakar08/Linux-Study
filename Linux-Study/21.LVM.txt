@@ -192,3 +192,48 @@ Mirror Method [Migrate lvm from one volume to another volume without data loss]
  7. # lvs to verify and mount
 
  8. VG restore also same procedure
+
+ LVM Snapshot
+ -------------
+ Snapshot
+ --------
+ A snapshot is an instence of data created as a refernce point for data protection and disaster recovery purposes.
+ It is a pointing time copy
+
+ What ever data you are deleted in the lvm it was stored in the sanpshot
+
+ Advantages And Usage of Snapshot
+ ---------------------------------
+ 1.Used for consistence data backup
+ 2.Disaster recovery purpose
+ 3.Data recovery
+ 4.To avoid major disruption to the system by any upgrade/change
+ 5.Tp protect boot/system image
+
+ Disadvantage
+ ------------
+ What is the lvm size same size you need to provide snapshot for backup the data
+
+ Creatting the LVM snapshot
+ ---------------------------
+ # lvcreate --size <specify the size of the snapshot> --snapshot --name <snapshot name>  <lvm path>
+
+ Type # lvs command to verify the snapshot is created or not
+
+ Mount the snapshot and copy the files
+
+ # mount <snapshot path>  <mount location>  -o nouuid,ro 
+
+ Delete the old lvm and use the snapshot to the lvm / merge the snapshot to the old lvm
+
+ # lvconvert --merge <snapshot path>
+
+ After mount the lvm and check
+
+ Note : After creating the snapshot if you add new file it will not show in your old snapshot
+
+ Delete or remove the snapshot using LVremove command
+
+ unmount the snapshot
+
+ # lvremove <snapshot path>
