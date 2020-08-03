@@ -1,0 +1,28 @@
+DD Command
+-------------
+The DD command is a disk dump command
+
+1.Copy the disk or mirror the disk from one location to another
+  # dd if=<source location ike : /dev/sda1> of=<destination location : /dev/sdb1> status=progress   ---- here status it was showing the backup process
+
+2.Create the disk image using dd command
+  # dd if=<source location : /dev/sda1>  of=<destination location : /tmp/sdaimage.img>  status=progress 
+
+3.Compress the image file
+  # dd if=<source location : /dev/sda1> | gzip > <destination location : /tmp/sdaimage.img.gz>  
+
+4.Restore the files
+  # dd if=/tmp/sdaimage.img.gz  of=/dev/sdd
+  # dd if=/tmp/sdaimage.img  of=/dev/sdd
+
+5.Clone the partition
+  # dd if=/dev/sda1 of=/dev/sdb1 bs=4096 conv=noerror,sync status=progress      ---- here bs=bit size 4096
+
+6.Backup of complete MBR partition 
+  # dd if=/dev/sda of=/tmp/MBRfile.img bs=512 count=1 status=progress
+
+7.See the information of the image using od command
+  # od -xa <image name>
+
+8.Create a fixed size of file 
+  # dd if=<location like : /de/sdb1> of=<file name : test.txt> bs=1024 <size>  count=1

@@ -299,3 +299,11 @@ File system commands
   Find the particular file size in the linux like here size is 1371
   ------------------------------------------------------------------
    ls -l | awk '{if ($5 == 1371) print $9}'
+
+ Create fixed size of files in linux
+ -----------------------------------
+ 1.# head -c 5MB /dev/sdb1 > test.txt
+ 
+ 2.# truncate -s 5M ostechnix.txt
+
+ 3.# dd if=/dev/urandom of=ostechnix.txt bs=5MB count=1

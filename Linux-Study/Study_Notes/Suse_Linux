@@ -1,0 +1,116 @@
+Zypper and YaST are the Package Manager for SUSE Linux, which works on top of RPM.
+
+Yash
+------
+Yash --- yet another setup tool
+This is a package manager tool in suse linux it works on open suse and suse enterprise edition 
+
+Zypper
+------
+Zypper --- is a command line interface of Zypp package manager for installing,removeing and updating suse
+
+1.Listing the repos
+  # zypper repos
+  # zypper lr
+
+2.List the repository URl
+  # zypper lr -u
+
+3.Checking the package is installed or Not 
+  # rpm -qa --last | grep <package name>
+
+4.Check the package in the repository 
+  # zypper se -s <package name>
+
+5.List only installed package
+  # zypper se --installed-only
+
+  Checking particular package
+  # zypper se --inastlled-only | grep <package name>
+
+6.Information about the package
+  # zypper info <package name>
+
+7.Installing the package
+  # zypper in <package name> 
+
+8.Remove the package
+  # zypper rm <package name>
+
+9.Checking package with the required dependencies
+  # zypper info --requires <package name>
+
+10.Remove the package with the dependencies
+   # zypper remove --clean-deps <package name>
+
+11.Update the package
+   # zypper update 
+
+12.update specify package
+   # zypper up <package name>
+
+13.Clean the repository 
+   # zypper clean 
+
+14.clean all the repository
+   # zypper clean --all
+
+15.upgrade suse to the recent version
+   # zypper dist-upgrade
+
+16.The zypper logs are stored in 
+   cat /var/log/zypper/history 
+  
+17.Enable the zypper repository
+   # zypper mr -e <repository number>
+
+18.Disable the repository 
+   # zypper mr -d <repository number>
+
+19.Add the new repository 
+   # zypper ar <repository url>
+   
+20.Checking update
+   # zypper list-updates
+
+https://www.cyberciti.biz/faq/suse-15-update-installed-packages-for-security/
+
+  Networking check in suse
+  ------------------------
+  Ip address finding
+  1. ifconfig
+  2. ip a s
+  3. Interface up  --- ifup eth0 / ifdown eth0
+  4. router ip checking ip r s
+
+  Ssh connection in suse
+  ----------------------
+  systemctl start sshd.service
+
+  firewall in suse
+  ----------------
+  firewalld 
+
+  firewall-cmd --permanent --add-port=22/tcp
+  firewall-cmd --reload
+
+ Linux Patching
+ ------------------
+ Why patch linux servers
+ -----------------------
+ 1.Maintanin secure environment for your servers and applications
+ 2.Maintaining the up-to date working environment  --- it provides the opportunity to provide the new features in the software package
+
+ Patching fails and resolution
+ ------------------------------
+ 1. Upgrade fails due to insufficient space on boot partition
+    Ex : Error: RPM failed:    installing package kernel-default-3.12.67-60.64.18.1.x86_64 needs 17MB on /boot filesystem
+    resolution
+    -----------
+    Move the vmlinux, vmlinuz, and initrd images out of the /boot directory before starting the installation
+    hostname:~ # mkdir /tmp/boot
+    hostname:~ # cd /boot
+    hostname:/boot # mv vmlinu* initrd* /tmp/boot
+
+    the kernel and initrd images are only loaded into memory during the GRUB phase of system boot, 
+    moving these files out of /boot once the system is running will not impact the live system
