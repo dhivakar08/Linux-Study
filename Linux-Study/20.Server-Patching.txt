@@ -37,3 +37,46 @@ Manage engine patch manager plus
 5.In the scan result select the Critical/important based on your priority select and install patche
 
 6.You have schedule option also we can schedule
+
+
+Patching 
+--------
+1.Check if the machine is a physical or VM. and check for System Information
+  # dmidecode -t system
+  # dmidecode -s system-product-name
+  # lspci | grep -i vmware
+  # dmidecode | less
+  # cat /etc/info.server
+
+2. Take System Backup
+   Virtual machines,We can take a snapshot & revert to it in case required.
+   For Physical machines, check for the ILO address & Take backup using tools if configured.for
+
+3. On day of activity use your monitoring tool to acknowledge alerts.
+4. Bring App and DB down on server.
+5. Go for a simple reboot to ensure server doesn’t have any prior file system issues.
+6. Update the kernel on the machine. It is preferable to go for --install instead of --update option.
+7. Do a yum update for security and rest patches to complete the update.
+8. Reboot the machine.
+9. Once up, confirm the server is updated by uname -a and yum check-update.
+10. Put server out of Maintenance mode once confirmed Application/DB is up and running.
+11. In case of issue, kindly rollback using yum history 
+
+Perform RollBack
+----------------
+1.rpm -Uvh --rollback '1 hour ago'
+
+2.Check update history
+  yum history
+
+3.Check info of a particular update
+  yum history info 46
+
+4.To rollback to before update ID 47
+  yum history rollback 46
+
+5.Undo an update
+  yum history undo 46
+
+6.To repeat an update
+  yum history repeat 46

@@ -101,6 +101,28 @@ https://www.cyberciti.biz/faq/suse-15-update-installed-packages-for-security/
  1.Maintanin secure environment for your servers and applications
  2.Maintaining the up-to date working environment  --- it provides the opportunity to provide the new features in the software package
 
+ 3.Before do the patching note the linux kernerl version
+   # uname -mrs   ---- m - machine r - kernel release s - kernel name
+
+ 4.Refersh SELS repository 
+   # zypper Refersh
+
+ 5.If there any updates available to check using
+   # zypper list-patches
+
+ 6.list the number of needed patches 
+   # zypper patch-check
+
+ 7.see a list of the updates on screen
+   # zypper list-updates
+
+ 8.Note that the zypper patch command does not apply patches from third party repos.
+   # zypper patch
+
+ 9.update a single package
+   # zypper update pkg_name
+
+
  Patching fails and resolution
  ------------------------------
  1. Upgrade fails due to insufficient space on boot partition
