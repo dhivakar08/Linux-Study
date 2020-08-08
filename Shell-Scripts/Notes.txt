@@ -1,0 +1,16 @@
+Linux common syntax
+--------------------
+command [option] [input]
+In linux every command after may/may not have option and may/may not input to execute
+Ex : ls -l /tmp 
+ls  --- [command] -l --- [option] /tmp ---[input]
+
+Echo 
+-----
+The echo is used to print something on the screen
+
+echo [option]    ---- here echo is a command and [option] --- is -e & -n 
+1. -e ---enable esc sequance  
+   \n --- new line
+   \t --- tab space
+   \e --- enable color

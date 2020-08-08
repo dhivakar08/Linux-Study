@@ -1,0 +1,36 @@
+Checking the linux kernel
+
+# cat /etc.redhat-release
+# cat /etc/os-release
+
+LSOF  
+-----
+List of open files 
+
+1.lsof -h  ---- help 
+
+2.lsof | wc -l  --- it will provide the word count list of open files
+
+3.lsof -u <username> --- it will provide list of files opend by particular user
+
+4.lsof -i tcp:80  --- it shows the particular port opend user
+
+5.lsof -p -i tcp:80
+
+6.lsof -i <specify the protocol like : tcp>
+
+7.lsof -i tcp -a -u <mention the username>   ---- here -a means and it will provide list of open tcp port in user india
+
+8.lsof -p <PID> --- it list out the list of process opend by the PID
+
+9.lsof +d <location like /tmp/log>  --- it shows the list of opend files in the dircetory
+
+10.If we aware only starting file / services name to check the list of opened 
+   # lsof -c fire   ---- here i checking list of open service in firewalld
+
+11.lsof files open in the particular ip address
+   # lsof -i @<ip address>
+
+12.Specify the port range
+   # lsof -i :20-30
+   # lsof -i :20-30 -u ^root

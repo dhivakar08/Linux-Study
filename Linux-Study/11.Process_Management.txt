@@ -21,7 +21,7 @@ Type of Process
                 - Often started at boot time and run untill the system is shut down
                 - daemons can be started / stopped on demand, using "systemctl" command
          
-         3. kernel Process
+3. kernel Process
                 - Similar to daemon procees
                 - They run / execute in the kernel space
                 - primary difference is that kernel process have full access to kernel data structure, that makes more powerful that daemon process
@@ -116,4 +116,23 @@ Type of Process
    # top -d1 -b > topout  ---- it send the top d - delay 1 sec to store topout files
    # top -H -p <PID>  > topout ---- store particular process
 
-   
+   CPU Load Avaerage
+   -----------------
+ The system load Avaerage using below mentioned commands
+ 1.# top  
+ 2.# uptime
+ 3.# cat /proc/loadavg
+
+ Load avaerge :
+ ---------------
+ The load average means number of jobs in the run quqe or waiting for the disk IO dshow in the ps or top output
+ The Avaerage for the 1min 5min and 15min
+ Example : In a single core cpu 1.37 means in 1 Min 
+           .37 is waitiing process 1 is 1 percentage of the cpu utilization 
+
+ 4 core cpu means the value is 4
+
+ # lscpu  --- command to find the cpu core value
+ For usisng mpstat ---- systat package is required
+ # mpstat command will provide the cpu cores and cpu list
+ # mpstat -P ALL 1

@@ -79,4 +79,8 @@ Perform RollBack
   yum history undo 46
 
 6.To repeat an update
-  yum history repeat 46
+  yum history repeat 46 
+
+After installing the packages rpm was not update 
+# rpm -ivhinstall a new package, but rpm -Uvh updates an existing one.
+

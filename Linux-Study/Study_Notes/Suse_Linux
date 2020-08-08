@@ -136,3 +136,9 @@ https://www.cyberciti.biz/faq/suse-15-update-installed-packages-for-security/
 
     the kernel and initrd images are only loaded into memory during the GRUB phase of system boot, 
     moving these files out of /boot once the system is running will not impact the live system
+
+  2.Remove the duplicate packages
+    Remove the duplicate packages using
+    # package-cleanup
+    # package-cleanup --dupes
+    # package-cleanup --cleandupes
