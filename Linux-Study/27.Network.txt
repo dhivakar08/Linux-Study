@@ -43,6 +43,8 @@ Tyep of interface
 
    hostnamectl set-hostname <enter the hostname>
 
+   or cd /etc/sysconfig/network   ---- add the hostname here
+
  9. DNS configuration
 
    path : /etc/reslove.conf   | add the DOMAIN=<enter the domain name>
