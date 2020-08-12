@@ -1,0 +1,122 @@
+Filesystem Hierarchy Standard (FHS)
+------------------------------------
+Ref : https://www.linuxjournal.com/content/filesystem-hierarchy-standard
+
+1./bin and /sbin
+  -The /bin and /sbin directories are intended for storing binary executable files. 
+  -Both directories store executables that are considered essential for booting the system 
+  -main difference between these directories is that the /sbin directory is intended for system binaries, 
+   or binaries that administrators will use to manage the system
+Ex:
+  -/bin contains Linux core commands reside like ls, mv
+  -/sbin – similar to /bin, but it contains programs that are normally run only by the system administrator.
+
+2./boot
+  -This directory stores all the bootloader files (these days, this is typically GRUB), kernel files and initrd files.
+  -It's often treated as a separate, small partition, so that the bootloader can read it more easily. 
+  -/boot – contains the files related to the initial booting of the computer.
+  -/boot: Where boot loader and boot files are located.
+
+3./etc
+  -The /etc directory is intended for storing system configuration files.
+  -If you need to configure a service on a Linux system, or change networking or other core settings, this is the first place to look
+  -/etc: Contains configurations for the installed packages
+
+4./home
+  -The /home directory is the location on Linux systems where users are given directories for storing their own files.
+  -Each directory under /home is named after a particular user's user name and is owned by that user. 
+  -On a server, these directories might store users' email, their SSH keys, or sometimes even local services users are running on high ports.
+
+5./lib
+  -The /lib directory stores essential shared libraries that the essential binaries in /bin and /sbin need to run. 
+  -This is also the directory where kernel modules are stored.
+
+6./usr, /usr/bin, /usr/lib and /usr/sbin
+  -The /usr directory is intended to be a read-only directory that stores files that aren't required to boot the system.
+  -In general, when you install additional software from your distribution, its binaries, libraries and supporting files
+   go here in their corresponding /usr/bin, /usr/sbin or /usr/lib directories.
+  -you often would mount this directory separately on its own larger disk, so it could grow independently as you added new software.
+
+7./opt
+  -A place for users to install software outside their distributions.
+
+8./root
+  -The /root directory is a special home directory for the root user on the system. 
+  -It's owned and readable only by the root user
+
+9./dev
+  -You will find device files here. UNIX systems have an "everything is a file" principle that means even your hardware ends up with a file. 
+  -This directory contains files for devices on your system from disks and partitions to mice and keyboards.
+  -Where all physical drives are mounted like USBs DVDs
+
+10./proc and /sys
+   -The /proc directory stores files that represent information about all of the running processes on the system. 
+   -You can actually use tools like ls and cat to read about the status of different processes running on your system.
+   -The /sys directory is designed to contain all of these files that let you interact with the kernel
+
+11./srv
+   -This directory is designed for storing files that a server might share externally. 
+   -This is considered the proper place to store web server files (/srv/www is popular).
+
+12./var
+   -The /var directory was designed for storing files that might vary wildly in size or might get written to frequently.
+   -The /var directory most definitely needs to be writeable, because within it you will find log files, mail server spools, and other files
+
+13./mnt and /media
+   -When you add extra filesystems to your computer, whether it's from a USB drive, an NFS mount or other sources, 
+    you need some standard place to mount them. This is where /mnt and /media come in. 
+   -The /media directory is designed for those disks that are mounted temporarily, such as CD-ROMs and USB disks.
+
+14./tmp, /var/tmp and /dev/shm
+   -These directories are ideal for programs that need to store some data in a file temporarily
+   -When a Linux system boots, one of the initial boot processes cleans out all of the files in the /tmp directory
+   -The /var/tmp directory, on the other hand, does not get cleaned out between reboots, so this is a good place to store files
+   -the /dev/shm directory is a small ramdisk, and any files that are stored there reside only in RAM, and after the system is turned off, these files are erased.
+    Hackers love to store files in /dev/shm for this reason - make sure to provide the permission 0600
+  
+
+Linux file system types
+-----------------------
+Journaling
+----------
+Journaling has a dedicated area in the file system, where all the changes are tracked. When the system crashes, the possibility of file system corruption is less because of journaling.
+
+There are three types of journaling available in ext3 file system.
+Journal – Metadata and content are saved in the journal.
+Ordered – Only metadata is saved in the journal. Metadata are journaled only after writing the content to disk. This is the default.
+Writeback – Only metadata is saved in the journal. Metadata might be journaled either before or after the content is written to the disk.
+
+1.Ext
+  -ext stands for “Extended file system”
+  -It’s had four major revisions.
+
+2.Ext2 
+  -Ext2 is not a journaling file system.
+  -Overall ext2 file system size can be from 2 TB to 32 TB
+  -Ext2’s lack of a journal means it writes to disk less, which makes it useful for flash memory like USB drives. However, file systems like exFAT and FAT32 also don’t use journaling 
+  -The recommend you avoid Ext2 unless you know you need it for some reason.
+
+3.Ext3
+  -Ext3 is basically just Ext2 with journaling.
+  -Overall ext3 file system size can be from 2 TB to 32 TB
+  -Ext3 was designed to be backwards compatible with Ext2, allowing partitions to be converted between Ext2 and Ext3 without any formatting required.
+
+4.Ext4
+  -Ext4 was also designed to be backwards compatible
+  -You can mount an Ext4 file system as Ext3, or mount an Ext2 or Ext3 file system as Ext4. 
+  -It includes newer features that reduce file fragmentation, allows for larger volumes and files.
+  -Several other new features are introduced in ext4: multiblock allocation, delayed allocation, journal checksum. fast fsck, etc. 
+  -Overall maximum ext4 file system size is 1 EB (exabyte). 1 EB = 1024 PB (petabyte). 1 PB = 1024 TB (terabyte).
+  -This is the most modern version of the Ext file system and is the default on most Linux distributions.
+  -In ext4, you also have the option of turning the journaling feature “off”.
+
+   Diable the journaling feature using # tune4fs -O ^has_journal /dev/sda2
+   ^has_journal" switched it off, "has_journal" will switch it back on
+
+5.BtrFS
+ -It stands for “B-Tree File System” and allows for drive pooling, on the fly snapshots, transparent compression, and online defragmentation.
+
+6.XFS
+  -It’s similar to Ext4 in some ways
+  -XFS has good performance when dealing with large files, but has worse performance than other file systems when dealing with many small files.
+  -Cannot reduce the XFS file system
