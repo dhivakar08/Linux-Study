@@ -14,6 +14,25 @@ Default runlevel
 5 - X11 (Graphical interface)
 6 - reboot 
 
+Checking the current run level 
+# who -r   --- it will display the current run level status
 
+2.Change the runlevel using  #init (or) #telinit command
+ Ex : 
+     1.telinit 6  --- it will reboot the system
+     2.init 6 --- it will also reboot the system
 
+3.To set the default target, run the command below
+  # systemctl set-default multi-user.target  
 
+4.The chkconfig tool is used in RedHat based systems (like CentOS) to control what services are started at which runlevels.
+  # chkconfig --list
+
+5.Check particular service is enabled or not using 
+   # chkconfig --list --- it show the service enabled or not in old systems like rhel 5 or 6
+   # systemctl list-unit-files | grep nginx    ---- it will display the service is enabled or not
+
+6.If you are enable the nginx service 
+   # systemctl enable nginx.service
+   The link was created under following location
+   # cd /etc/systemd/system 

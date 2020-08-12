@@ -29,3 +29,39 @@ Linux boot level troubleshooting steps
    6.cd /boot
    7.dracut -f initramfs-$(uname -r) initramfs-$(uname -r)   (or) # uname -r instead of -$(uname -r) enter the kernel version
      Here dracut is a tool for restore initramfs file it contain rhel versions defaulty
+  
+
+ 2.Recover /etc/passwd file
+   
+   Note : do not test on production system
+
+   # cp /etc/passwd- /etc/passwd
+
+ 3.Recover /etc/shadow
+    
+    # cp /etc/shadow- /etc/shadow
+
+ 4.Recover /etc/inittab 
+   Recover inittab you need to install the inittab rpm
+   # rpm -q -f /etc/inittab   ---- it will provide the rpm pkg name
+   # rpm -ivh <pkg name>
+   Once its done the file created in /etc/inittab Location
+
+ 5.Recover /etc/fstab
+   If /etc/fstab file is deleted or some one make a wrong entry after system reboot it will not up it goes maintanance mode
+
+   1.After restart system in manitanance mode enter root passwd
+   2.In maintanace mode all the files are in read only permission include root partition also so we remount the root partition and edit the file
+   3.mount -o remount rw /
+   4.Now edit the file using /etc/fstab and make it correct and restart the system
+
+   If someone delete the fstab file us ethe below mentioned method to recover it
+   # check if you are root you can type #who or #whoami
+   # cat /proc/mounts > /etc/fstab
+   # chmod 644 /etc/fstab
+
+  6.The Difference between fstab and mtab
+   1./etc/fstab is a created by the user. It contains list of volumes to be mounted by mount.
+   2./etc/mtab is a created by the system. It contains a list of currently mounted devices.
+   3.The format of the files is similar. After mounting a new device, copy the relevant line from /etc/mtab to /etc/fstab
+     so that it will be auto-mounted after boot or when calling mount -a

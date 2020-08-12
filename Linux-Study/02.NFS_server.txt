@@ -78,7 +78,11 @@ client configuration
                  if the option is a nonzero value, the filesystem will be backed up.
 
 - 0         ---- Mentions the fsck option. That is if the value is set to zero, the device or partition will be excluded from fsck check. 
-                 if it is nonzero the fsck check will be run in the order in which the value is set.1 means first check fsck 2 maens reboot.
+                 if it is nonzero the fsck check will be run in the order in which the value is set.1 means first check fsck in root 2 maens check others in parallel 
+
+- 0         ---- means will not check the file system
+- 1         ---- the root directory
+- 2         ---- all other modifiable file systems; file systems on different drives are checked in parallel
 
 Note : The FSCK is a system utility. It is a tool that is used to check the consistency of a file system in the Unix-like operating systems.
 

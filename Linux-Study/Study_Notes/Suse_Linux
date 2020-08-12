@@ -103,6 +103,7 @@ https://www.cyberciti.biz/faq/suse-15-update-installed-packages-for-security/
 
  3.Before do the patching note the linux kernerl version
    # uname -mrs   ---- m - machine r - kernel release s - kernel name
+   # hostnamectl
 
  4.Refersh SELS repository 
    # zypper Refersh
@@ -142,3 +143,34 @@ https://www.cyberciti.biz/faq/suse-15-update-installed-packages-for-security/
     # package-cleanup
     # package-cleanup --dupes
     # package-cleanup --cleandupes
+
+ Run-level in linux
+ -------------------
+
+ configuration file : /etc/init.d
+ 
+ 1.0 - Shut-down
+ 2.1 - single user mode
+ 3.2 - multiusermode with out Network
+ 4.3 - multiuser with Network
+ 5.4 - unused
+ 6.5 - full multiuser with graphical interface
+ 7.6 - reboot
+
+ 1.Checking current runlevel using 
+ # who -r
+
+ 2.Change the runlevel using  #init (or) #telinit command
+ Ex : 
+     1.telinit 6  --- it will reboot the system
+     2.init 6 --- it will also reboot the system
+
+  
+ 3.If you are enable the nginx service 
+   # systemctl enable nginx.service
+   The link was created under following location
+   # cd /etc/systemd/system 
+
+ 4.Check particular service is enabled or not using 
+   # chkconfig --list --- it show the service enabled or not in old systems
+   # systemctl list-unit-files | grep nginx    ---- it will display the service is enabled or not

@@ -86,10 +86,14 @@ File / Directory Permissions
   
  SGUID
  -----
+ SUID is a special file permission for executable files which enables other users to run the file with effective permissions of the file owner
+
  The Set Group ID (SGID) bit is very similar to the SUID bit. When the SGID bit is set on an executable file, 
  the effective group is set to the group of the file. 
 
  SGUID default value is 2
+ -------------------------
+ SGID is a special file permission that also applies to executable files and enables other users to inherit the effective GID of file group owner.
 
  1.Setting the SGUID
    # chmod 2660 <file / directory name>
