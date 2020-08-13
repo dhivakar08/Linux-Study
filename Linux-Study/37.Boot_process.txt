@@ -1,0 +1,57 @@
+Linux Boot Process
+-------------------
+1.BIOS
+  -BIOS (Basic Input Output System) is a software program comes pre-built in a motherboard chipset.
+  -BIOS loads and scans for devices such as Hard Disk, CD-ROM, RAM, etc.
+  -BIOS searches for MBR (Master Boot Record: 1st sector) of the primary hard drive, it scans for 1st 
+   stage loader (In our case boot loader is (GRUB LILO) and hands over the responsibility to MBR.
+  -LILO is a boot loader for Linux and was the default boot loader for most Linux distributions 
+  -Once the boot loader program is detected, it's then loaded into memory and the BIOS gives control of the system to it.
+
+2.MBR (Master Boot Record)
+  -MBR contains the information of loader of most operating system e.g UNIX, Linux and WINDOWS
+  -MBR holds the small binary information of 1st stage of loader
+  -MBR consist physical sector of the first disk drive (i.e 512 bytes)
+  -The BIOS surrender rights to the first stage boot loader, 
+   which then scans partition table and finds second stage boot loader on the partition configured as bootable.
+
+3.Boot Loader
+  -The boot loader termed from 1st stage loader and loads itself into RAM. 
+  -The default stage 2 boot loader is a GRUB (Grand Unified Boot Loader) or LILO (Linux Loader)
+  -Once GRUB is loaded into RAM, then it’s search for the location of Kernel.
+  -GRUB will scrutinize the map file to find the kernel image, that is located under (/boot) and load it.
+  -GRUB loads the kernel (vmlinuz-version) from /boot partition
+  -The GRUB configuration file at /boot/grub/grub.conf or /etc/grub.conf
+  -GRUB just loads and executes Kernel and initrd images
+  
+4.Kernel
+  -In this stage of the boot process, the kernel that was selected by GRUB first mounts the root file system that's specified in the grub.conf file.
+  -Then it executes the /sbin/init program, which is always the first program to be executed.
+  -You can confirm this with its process id (PID), which should always be 1.
+  -The kernel then establishes a temporary root file system using Initial RAM Disk (initrd) until the real file system is mounted.
+
+5.Init
+  -At this point, your system executes runlevel programs.
+  -At one point it would look for an init file, usually found at /etc/inittab to decide the Linux run level.0 – halt
+  -1 – Single user mode
+  -2 – Multiuser, without NFS
+  -3 – Full multiuser mode
+  -4 – unused
+  -5 – X11
+  -6 – reboot
+  -Init identifies the default initlevel from /etc/inittab and uses that to load all appropriate program.
+  -Execute ‘grep initdefault /etc/inittab’ on your system to identify the default run level and execute
+  
+6.Runlevel programs
+  -When the Linux system is booting up, you might see various services getting started. 
+  -For example, it might say “starting sendmail …. OK”. Those are the runlevel programs, executed from the run level directory as defined by your run level.
+  -Depending on your default init level setting, the system will execute the programs from one of the following directories.
+  -Run level 0 – /etc/rc.d/rc0.d/
+  -Run level 1 – /etc/rc.d/rc1.d/
+  -Run level 2 – /etc/rc.d/rc2.d/
+  -Run level 3 – /etc/rc.d/rc3.d/
+  -Run level 4 – /etc/rc.d/rc4.d/
+  -Run level 5 – /etc/rc.d/rc5.d/
+  -Run level 6 – /etc/rc.d/rc6.d/
+  -Programs starts with S are used during startup. S for startup.
+  -Programs starts with K are used during shutdown. K for kill.
