@@ -1,3 +1,10 @@
+
+Suse-Linux
+-----------
+1.S.u.S.E. was a company founded in Germany in 1992 and was the world’s first provider of an Enterprise Linux distribution.
+2.The name S.u.S.E. was an acronym for Software- und System-Entwicklung (Software and Systems Development)
+
+
 Zypper and YaST are the Package Manager for SUSE Linux, which works on top of RPM.
 
 Yash
@@ -174,3 +181,14 @@ https://www.cyberciti.biz/faq/suse-15-update-installed-packages-for-security/
  4.Check particular service is enabled or not using 
    # chkconfig --list --- it show the service enabled or not in old systems
    # systemctl list-unit-files | grep nginx    ---- it will display the service is enabled or not
+
+ Snapper 
+ ---------
+ Snapper on SUSE Linux Enterprise Server is set up as an undo and recovery tool for system changes. 
+ By default, the root partition ( / ) of SUSE Linux Enterprise Server is formatted with Btrfs .
+
+ Disabling/Enabling Timeline Snapshots
+ --------------------------------------
+ -Enabling.  snapper -c root set-config "TIMELINE_CREATE=yes"
+
+ -Disabling.  snapper -c root set-config "TIMELINE_CREATE=no"

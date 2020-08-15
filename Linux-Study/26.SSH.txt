@@ -29,7 +29,7 @@ How SSH works
 7.Normally the key files are stored in .ssh location
 
 8.Create a ssh key using
-  # ssh-keygen -t rsa  ------- enter enter
+  # ssh-keygen -t rsa  ------- enter enter     ---- t means type , rsa -- is a algorithm
 
 9.Copy the pub key to server
   # mkdir .ssh

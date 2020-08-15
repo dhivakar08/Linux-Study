@@ -42,7 +42,7 @@ services = crond
 ex: i went to execute df -h in 18hr
 crontabt -e 
 
-#min hour day-of-month month day-of-week commands
+# min hour day-of-month month day-of-week commands
 03 18 * * * /usr/bin/df -h > /tmp/crondisk.txt
 for checking # crontab -l 
 

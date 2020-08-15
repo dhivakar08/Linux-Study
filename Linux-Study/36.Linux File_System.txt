@@ -113,6 +113,9 @@ Writeback – Only metadata is saved in the journal. Metadata might be journaled
    Diable the journaling feature using # tune4fs -O ^has_journal /dev/sda2
    ^has_journal" switched it off, "has_journal" will switch it back on
 
+   Checking journaling features is enabled or not
+   # debugfs -R features /dev/sda1
+   # tune2fs -l /dev/sdaX | grep features
 5.BtrFS
  -It stands for “B-Tree File System” and allows for drive pooling, on the fly snapshots, transparent compression, and online defragmentation.
 
