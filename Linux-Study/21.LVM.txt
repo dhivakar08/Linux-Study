@@ -1,4 +1,4 @@
-LVM Configuration
+LVM Configuration                                ----- the code is 8e
 ------------------
 
 1. Create PV using # pv create /dev/sda1 
@@ -31,9 +31,11 @@ LVM Configuration
    lvcreate -n <lv name> -L1G <vg name>
 
 12.lv extend
-   # lvextend <lvm path> -L+1000M -r    ---------- the -r option is specified as this will carry out a resize of the file system online.
-
+   # lvextend <lvm path> -L +1000M -r    ---------- the -r option is specified as this will carry out a resize of the file system online.
+     
+  Note : If you are adding the size you need to use + symbol other wise you will get not larger than existing sizef 
   Note : if extend the lv it will not display the df -h beacause we are not give the file system type of extended space
+         # e2fsck -f <lvm path>  after run the second command
          # resize2fs  <lvm path>
 
  If you want xfs file system using # xfs_growfs <lvm path>
@@ -46,10 +48,19 @@ LV reduce
 
  Before reduce take a backup of the lvm and unmount from fstab
  
-  Note : # e2fsck -f <lvm path> check the file system is fine / crashed
+  Note : # e2fsck -f <lvm path> check the file system is fine / crashed     -------- very important
+         # resize2fs <lvm path>
+
+ After Mounting
+         # debugfs -R features <lvm dev path> 
+         # tune2fs -l <lvm dev path> | grep features          --------- used to chek jouranling is enabled or not
+
+ Disable and enabling the journaling feature you should unmount the file system first and run the command
+ ^has_journal" switched it off, "has_journal" will switch it back on
+
 
 13.lv reduce
-   # lvreduce <lvm path> -L-1000M -r
+   # lvreduce <lvm path> -L -1000M -r     ----- here - symbol is important then only it will reduce enter size other wise it will reduce hole vm as your enter size
 
 14.Checking lvm
    # lvs / # lvdisplay -v
@@ -162,6 +173,8 @@ Mirror Method [Migrate lvm from one volume to another volume without data loss]
    # vgreduce <vg path> <old volume/disk path>
    # vgs -o+devices
    # lvs
+
+
 
  LVM pvmove Mirroring Method
 ---------------------------

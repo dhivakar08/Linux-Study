@@ -109,11 +109,12 @@ Writeback – Only metadata is saved in the journal. Metadata might be journaled
   -Overall maximum ext4 file system size is 1 EB (exabyte). 1 EB = 1024 PB (petabyte). 1 PB = 1024 TB (terabyte).
   -This is the most modern version of the Ext file system and is the default on most Linux distributions.
   -In ext4, you also have the option of turning the journaling feature “off”.
-
+   
+   Disable and enabling the journaling feature you should unmount the file system first and run the command
    Diable the journaling feature using # tune4fs -O ^has_journal /dev/sda2
    ^has_journal" switched it off, "has_journal" will switch it back on
 
-   Checking journaling features is enabled or not
+   Checking journaling features is enabled or not after mounting
    # debugfs -R features /dev/sda1
    # tune2fs -l /dev/sdaX | grep features
 5.BtrFS
