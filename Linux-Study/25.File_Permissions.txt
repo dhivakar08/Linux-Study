@@ -78,18 +78,47 @@ File / Directory Permissions
  ------------------------------
  SUID default value is 4 
 
+ Understanding the difference between Capital (S) and small (s) in SUID
+ - where you are assigning SUID has user executable permission then after applying SUID you will get a small (s)
+   Ex : Before applying SUID without executable permission on user owner
+
+   # chmod 644 /myscript.sh
+
+   # ls -l-rw-r--r--. 1 root root 0 Oct 16 11:35 /myscript.sh
+   After applying SUID without executable permission on user owner
+
+   # chmod 4644 /myscript.sh
+
+   # ls -l
+   -rwSr--r--. 1 root root 0 Oct 16 11:35 /myscript.sh
+
  1.Setting the SUID
    # chmod 4660 <file / directory name>
 
  2.Removing the SUID for removeing the permission using "s"
    # chmod u-s <file / directory name>
   
+ - if the user doe not have execute permission before you apply SUID then you will end up with capital (S) after applying SUID.
+ Before applying SUID with executable permission on user owner
+
+   # chmod 744 /myscript.sh
+
+   # ls -l
+   -rwxr--r--. 1 root root 0 Oct 16 11:36 /myscript.sh
+   After applying SUID with executable permission on user owner
+
+   # chmod 4744 /myscript.sh
+
+   # ls -l
+   -rwsr--r--. 1 root root 0 Oct 16 11:36 /myscript.sh
+   
  SGUID
  -----
  SUID is a special file permission for executable files which enables other users to run the file with effective permissions of the file owner
 
  The Set Group ID (SGID) bit is very similar to the SUID bit. When the SGID bit is set on an executable file, 
  the effective group is set to the group of the file. 
+
 
  SGUID default value is 2
  -------------------------

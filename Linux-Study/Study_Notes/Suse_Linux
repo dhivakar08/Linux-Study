@@ -186,9 +186,88 @@ https://www.cyberciti.biz/faq/suse-15-update-installed-packages-for-security/
  ---------
  Snapper on SUSE Linux Enterprise Server is set up as an undo and recovery tool for system changes. 
  By default, the root partition ( / ) of SUSE Linux Enterprise Server is formatted with Btrfs .
+ It require at least 16GB of partition size 
+
+ # snapper list  ---- it will list out the snapshot
+
+ Types of snapshots
+ -------------------
+ 1.Timeline snapshots
+ 2.Installation snapshots
+ 3.Administration snapshots
+
+ Timeline snapshots
+ ------------------
+ A single snapshot is created every hour. 
+ Old snapshots are automatically deleted. By default, the rst snapshot of the last ten days, months, and years are kept. 
+ Timeline snapshots are disabled by default.
+
+ Installation snapshots
+ -----------------------
+ Whenever one or more packages are installed with YaST or Zypper, a pair of snapshots is created
+ one before the installation starts (“Pre”) and another one after the installation has finished (“Post”).
+ In case an important system component such as the kernel has been installed, the snapshot pair is marked as important ( important=yes ).
+ Installation snapshots are enabled by default.
+
+ Administration snapshot
+ ------------------------
+  Installation snapshots are enabled by default.
+  when a YaST module is started (“Pre”) and another when the module is closed (“Post”). Old
+  snapshots are automatically deleted.
 
  Disabling/Enabling Timeline Snapshots
  --------------------------------------
  -Enabling.  snapper -c root set-config "TIMELINE_CREATE=yes"
 
  -Disabling.  snapper -c root set-config "TIMELINE_CREATE=no"
+
+ Directories That Are Excluded from Snapshots
+ --------------------------------------------
+ /boot/grub2/i386-pc , /boot/grub2/x86_64-efi , /boot/grub2/powerpc-ieee1275 , /boot/grub2/s390x-emu
+ A rollback of the boot loader configuration is not supported. 
+ The directories listed above are architecture-specific. The rest two directories are present on AMD64/Intel 64 machines, 
+ the latter two on IBM POWER and on IBM z Systems, respectively.
+
+ 1./home --- it does not reside on seprate partition
+ 2./opt,/var/opt --- Third party software usually installed
+ 3./srv --- contain data from web and FTP 
+ 4./tmp --- all are temp files
+ 5./usr/local --- mnually installing softwrae 
+ 6./var/lib & /var/log --- virtual machine files and logs rae stored in this location
+
+ Disable YaST snapshots
+ -----------------------
+ sudo vi /etc/sysconfig/yast2
+
+ Enable use of snapper for Yast.
+ USE_Snapper="yes"
+
+ Disabling/Enabling Installation Snapshots
+ ------------------------------------------
+ Enabling: Install the package snapper-zypp-plugin
+ Disabling: Uninstall the package snapper-zypp-plugin
+ Installation snapshots are enabled by default.
+
+ Snapper undo changes
+ ---------------------
+ # yast2 snapper 
+ Select the snapshot and click on show changes and specify 
+
+ 1.snapper list -t pre-post 
+ 2.snapper -v undochange
+
+ Manually Creating the snapshot
+ -------------------------------
+ # snapper create --description "<enter your description>"
+
+ Delete the snapshot
+ --------------------
+ # snapper list 
+ # snapper delete <enter the snapshot number>
+ # snapper list --- to confirm / go to /root .snapshot to verify
+
+ # snapper delete --sync <Snapshot number>  --- Deletes snapshot 23 for the default ( root ) configuration and makes the freed space available immediately
+
+ Checking the size of the snapshot
+ ----------------------------------
+ # snapper list ---- it will display the snapshot used size

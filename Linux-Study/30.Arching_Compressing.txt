@@ -55,3 +55,7 @@ In a way that uses less disk space than all the individual files and directories
    To extract a specific file from a tar archive, specify the file name at the end of the tar xvf command
    # tar xvf archive_file.tar /path/to/file
    # tar xvf archive_file.tar /path/to/dir/     ---- directory
+
+  7.Create a tar to another directory
+    Go to the destination folder here i create file from /tmp/test to /root/new.tar.bz
+   # tar -cvzf <enter new tar file name.tar.bz > -C <destination path like /tmp/test.txt>   --- here -C change the directory

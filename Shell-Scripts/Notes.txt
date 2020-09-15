@@ -1,3 +1,8 @@
+What is shell-scripting
+-----------------------
+A sequence of the command written in the one file and execute is called shell script
+
+
 Linux common syntax
 --------------------
 command [option] [input]
@@ -10,7 +15,20 @@ Echo
 The echo is used to print something on the screen
 
 echo [option]    ---- here echo is a command and [option] --- is -e & -n 
+
 1. -e ---enable esc sequance  
    \n --- new line
    \t --- tab space
    \e --- enable color
+
+ When ever you are using -e option provide the input in double quotes
+
+ Note : man console_code --- it will provide more information about the color
+
+ Redirectors
+ ------------
+ STDIN  --- it using less then symbol    <
+ STDOUT --- it using greater then symbol >
+ Stderr --- 1>
+ Stdout --- 2>
+ output and error to the same file using --- &>
