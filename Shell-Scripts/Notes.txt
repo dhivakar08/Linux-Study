@@ -16,6 +16,8 @@ The echo is used to print something on the screen
 
 echo [option]    ---- here echo is a command and [option] --- is -e & -n 
 
+-n Option is used to disabling triling of new line [Same line it will print Ex: echo -n hai]
+
 1. -e ---enable esc sequance  
    \n --- new line
    \t --- tab space
@@ -29,6 +31,50 @@ echo [option]    ---- here echo is a command and [option] --- is -e & -n
  ------------
  STDIN  --- it using less then symbol    <
  STDOUT --- it using greater then symbol >
- Stderr --- 1>
- Stdout --- 2>
+ Stdout ---  > 
+ Stderr --- 2>
+ 
+ Examples
+ ---------
+ 1.stdout ---- ls >out 
+ 2.stderr ----  ls print 2>out
+ 3.Both out & err ---- ls print Desktop &>out
+ 4. >out 2>&1 ---- any error will come it append to one
+ 5./dev/null ----- It used to nullify the output [It act like a trash ] once you nullify you cannot retrive back
+             ----- It is character special file
+ # >/dev/null  
+
  output and error to the same file using --- &>
+ >> The double Redirectors instead of overwritting it will append the content
+
+ ls >out ---- it will create a file and send the out to the file out but not display on the screen
+
+ Tee command
+ ------------
+ The tee command used to create a file and send the output to the file and disply the output on the screen also
+ # ls |tee <file name like : test>
+
+ In tee command you want to append you can use "-a" option 
+ # ls |tee -a test
+ 
+ The disadvantage of the shell script
+ -------------------------------------
+ If the command fails it never stop the script it continue to execute next command 
+
+ Exit status
+ ------------
+ The status of the previous executed command
+ The range from 0-255
+ 0 - Sucessful
+ 1-255 - Non Sucessful
+ Executing exitstatus using variable called as "?"
+
+ Ex: echo $?
+ Always use the value from 1-125 is the best practice to use the script 126-255 are the system defined values
+ 126 --- is a permission denied error
+ 127 --- command not found
+ 128 + n --- kill signals   (total kill signals are 64) here -n is the kill signal numbers
+
+ Pipe command
+ -------------
+ It used to combine two commands. output of the one command to input of another command
